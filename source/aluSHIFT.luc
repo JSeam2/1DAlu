@@ -1,10 +1,21 @@
-module aluSHIFT (
-    input clk,  // clock
-    input rst,  // reset
-    output out
-  ) {
+module shiftr (
+input a[8],
+input b[8],
+input alufn[6],
+//outputs
+output shift[8])
+   {
 
   always {
-    out = 0;
+    case(alufn[1:0]){
+		b00:
+		shift=a<<b[2:0]; 			//shift left
+		b01:
+		shift=a>>b[2:0]; 			//shift right
+		b11:
+		shift= $signed(a)>>>b[2:0]; //arithmetic shift right
+		default:
+		shift= a;
   }
+}
 }
