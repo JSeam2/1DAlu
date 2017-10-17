@@ -8,6 +8,7 @@ module aluBOOL (
   ) 
 
 {
+always{
   case(alufn[3:0]){
 
 /*=======NECC=========*/
@@ -34,5 +35,5 @@ module aluBOOL (
     default: out = 0;
     
   }
-  
+ }
 }
