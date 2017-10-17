@@ -1,7 +1,4 @@
 module aluLogic (
-    input clk,  // clock
-    input rst,  // reset
-    
     input alufn[6],
     input a[8],
     input b[8],

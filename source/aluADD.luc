@@ -1,16 +1,45 @@
 module aluADD (
-    input clk,  // clock
-    input rst,  // reset
-    
     input a[8],
     input b[8],
+    input alufn[6],
     
-    
-    
-    output out
+    output out[8],
+    output z,
+    output v,
+    output n,
+    output overflow
   ) {
 
+  sig temp[9];
+  sig over[9];
+  
   always {
-    out = 0;
+    case (alufn[1:0]) {
+      b00:
+          temp = a + b;
+          over = a - b;
+          
+      b01:
+          temp = a - b;
+          over = a - b;
+          
+      b10:
+          temp = a * b;
+          over =  a - b;
+      
+      b11:         
+          temp = a - (a/b * b);
+          over = a - b;
+      
+      default:
+          temp = a + b;
+          over = a - b;
+    }
+    
+    out = temp[7:0];
+    v = (a[7] & ~b[7] & (~over[7])) | ((~a[7])&(b[7])&over[7]);
+    overflow = (a[7] & b[7] & (~temp[7])) | ((~a[7])&(~b[7])&temp[7]);
+    n = over[7];
+    z = ~|over;
   }
 }

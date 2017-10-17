@@ -66,6 +66,25 @@ module mojo_top_0 (
     .value(M_ctr_value)
   );
   
+  wire [1-1:0] M_alu_overflow;
+  wire [8-1:0] M_alu_aluOUT;
+  wire [1-1:0] M_alu_z;
+  wire [1-1:0] M_alu_v;
+  wire [1-1:0] M_alu_n;
+  reg [6-1:0] M_alu_alufn;
+  reg [8-1:0] M_alu_a;
+  reg [8-1:0] M_alu_b;
+  aluLogic_6 alu (
+    .alufn(M_alu_alufn),
+    .a(M_alu_a),
+    .b(M_alu_b),
+    .overflow(M_alu_overflow),
+    .aluOUT(M_alu_aluOUT),
+    .z(M_alu_z),
+    .v(M_alu_v),
+    .n(M_alu_n)
+  );
+  
   always @* begin
     M_reset_cond_in = ~rst_n;
     rst = M_reset_cond_out;
@@ -77,8 +96,11 @@ module mojo_top_0 (
     M_seg_values = M_dec_ctr_digits;
     io_seg = ~M_seg_seg;
     io_sel = ~M_seg_sel;
-    io_led[0+0+7-:8] = io_dip[16+0+7-:8];
+    io_led[0+0+7-:8] = io_dip[0+0+7-:8];
     io_led[8+0+7-:8] = io_dip[8+0+7-:8];
-    io_led[16+0+7-:8] = io_dip[0+0+7-:8];
+    M_alu_b[0+7-:8] = io_dip[0+0+7-:8];
+    M_alu_a[0+7-:8] = io_dip[8+0+7-:8];
+    M_alu_alufn[0+5-:6] = io_dip[16+0+5-:6];
+    io_led[16+0+7-:8] = M_alu_aluOUT[0+7-:8];
   end
 endmodule

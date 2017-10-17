@@ -28,11 +28,12 @@ module mojo_top (
     edge_detector edge_detector (#RISE(1), #FALL(0));
     
     .rst(rst) {
-      multi_seven_seg seg;
-      multi_dec_ctr dec_ctr;
-      counter ctr (#SIZE(1), #DIV(24));
+      //multi_seven_seg seg;
+      //counter ctr (#SIZE(1), #DIV(24));
     }
   }
+  
+  aluLogic alu;
   
   always {
     reset_cond.in = ~rst_n;   // input raw inverted reset signal
@@ -43,15 +44,21 @@ module mojo_top (
     spi_channel = bzzzz;      // not using flags
     avr_rx = bz;              // not using serial port
     
-    edge_detector.in = ctr.value;
-    dec_ctr.inc = edge_detector.out;
-    seg.values = dec_ctr.digits;
+    // edge_detector.in = ctr.value;
+    //dec_ctr.inc = edge_detector.out;
+    //seg.values = dec_ctr.digits;
     
-    io_seg = ~seg.seg; // connect segments to the driver
-    io_sel = ~seg.sel; // connect digit select to the driver
+    //io_seg = ~seg.seg; // connect segments to the driver
+    //io_sel = ~seg.sel; // connect digit select to the driver
     
-    io_led[0][7:0] = io_dip[2][7:0];   // connect the DIP switches to the LEDs
+    io_led[0][7:0] = io_dip[0][7:0];   // connect the DIP switches to the LEDs
     io_led[1][7:0] = io_dip[1][7:0];
-    io_led[2][7:0] = io_dip[0][7:0];
-  }    
+    
+    alu.b[7:0] = io_dip[0][7:0];
+    alu.a[7:0] = io_dip[1][7:0];
+    alu.alufn[5:0] = io_dip[2][5:0];
+    
+    io_led[2][7:0] = alu.aluOUT[7:0];
+        
+  }
 }

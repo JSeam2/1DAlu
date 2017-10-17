@@ -7,14 +7,16 @@ Reading design: mojo_top_0.prj
 =========================================================================
 *                          HDL Parsing                                  *
 =========================================================================
-Analyzing Verilog file "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/seven_seg_7.v" into library work
-Parsing module <seven_seg_7>.
-Analyzing Verilog file "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/decoder_8.v" into library work
-Parsing module <decoder_8>.
-Analyzing Verilog file "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/decimal_counter_9.v" into library work
-Parsing module <decimal_counter_9>.
-Analyzing Verilog file "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/counter_6.v" into library work
-Parsing module <counter_6>.
+Analyzing Verilog file "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/seven_seg_8.v" into library work
+Parsing module <seven_seg_8>.
+Analyzing Verilog file "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/decoder_9.v" into library work
+Parsing module <decoder_9>.
+Analyzing Verilog file "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/decimal_counter_10.v" into library work
+Parsing module <decimal_counter_10>.
+Analyzing Verilog file "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/counter_7.v" into library work
+Parsing module <counter_7>.
+Analyzing Verilog file "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/aluADD_11.v" into library work
+Parsing module <aluADD_11>.
 Analyzing Verilog file "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/reset_conditioner_1.v" into library work
 Parsing module <reset_conditioner_1>.
 Analyzing Verilog file "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/multi_seven_seg_3.v" into library work
@@ -25,6 +27,8 @@ Analyzing Verilog file "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU
 Parsing module <edge_detector_2>.
 Analyzing Verilog file "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/counter_5.v" into library work
 Parsing module <counter_5>.
+Analyzing Verilog file "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/aluLogic_6.v" into library work
+Parsing module <aluLogic_6>.
 Analyzing Verilog file "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/mojo_top_0.v" into library work
 Parsing module <mojo_top_0>.
 
@@ -40,17 +44,25 @@ Elaborating module <edge_detector_2>.
 
 Elaborating module <multi_seven_seg_3>.
 
-Elaborating module <counter_6>.
+Elaborating module <counter_7>.
 
-Elaborating module <seven_seg_7>.
+Elaborating module <seven_seg_8>.
 
-Elaborating module <decoder_8>.
+Elaborating module <decoder_9>.
 
 Elaborating module <multi_dec_ctr_4>.
 
-Elaborating module <decimal_counter_9>.
+Elaborating module <decimal_counter_10>.
 
 Elaborating module <counter_5>.
+
+Elaborating module <aluLogic_6>.
+
+Elaborating module <aluADD_11>.
+WARNING:HDLCompiler:1127 - "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/mojo_top_0.v" Line 81: Assignment to M_alu_overflow ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/mojo_top_0.v" Line 83: Assignment to M_alu_z ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/mojo_top_0.v" Line 84: Assignment to M_alu_v ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/mojo_top_0.v" Line 85: Assignment to M_alu_n ignored, since the identifier is never used
 
 =========================================================================
 *                           HDL Synthesis                               *
@@ -59,18 +71,23 @@ Elaborating module <counter_5>.
 Synthesizing Unit <mojo_top_0>.
     Related source file is "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/mojo_top_0.v".
 WARNING:Xst:647 - Input <io_button> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <io_dip<23:22>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <cclk> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <spi_ss> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <spi_mosi> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <spi_sck> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <avr_tx> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <avr_rx_busy> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-    Found 1-bit tristate buffer for signal <spi_miso> created at line 69
-    Found 1-bit tristate buffer for signal <spi_channel<3>> created at line 69
-    Found 1-bit tristate buffer for signal <spi_channel<2>> created at line 69
-    Found 1-bit tristate buffer for signal <spi_channel<1>> created at line 69
-    Found 1-bit tristate buffer for signal <spi_channel<0>> created at line 69
-    Found 1-bit tristate buffer for signal <avr_rx> created at line 69
+INFO:Xst:3210 - "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/mojo_top_0.v" line 77: Output port <overflow> of the instance <alu> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/mojo_top_0.v" line 77: Output port <z> of the instance <alu> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/mojo_top_0.v" line 77: Output port <v> of the instance <alu> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/mojo_top_0.v" line 77: Output port <n> of the instance <alu> is unconnected or connected to loadless signal.
+    Found 1-bit tristate buffer for signal <spi_miso> created at line 88
+    Found 1-bit tristate buffer for signal <spi_channel<3>> created at line 88
+    Found 1-bit tristate buffer for signal <spi_channel<2>> created at line 88
+    Found 1-bit tristate buffer for signal <spi_channel<1>> created at line 88
+    Found 1-bit tristate buffer for signal <spi_channel<0>> created at line 88
+    Found 1-bit tristate buffer for signal <avr_rx> created at line 88
     Summary:
 	inferred   6 Tristate(s).
 Unit <mojo_top_0> synthesized.
@@ -98,27 +115,27 @@ Synthesizing Unit <multi_seven_seg_3>.
 	inferred   1 Combinational logic shifter(s).
 Unit <multi_seven_seg_3> synthesized.
 
-Synthesizing Unit <counter_6>.
-    Related source file is "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/counter_6.v".
+Synthesizing Unit <counter_7>.
+    Related source file is "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/counter_7.v".
     Found 18-bit register for signal <M_ctr_q>.
     Found 18-bit adder for signal <M_ctr_q[17]_GND_5_o_add_0_OUT> created at line 35.
     Summary:
 	inferred   1 Adder/Subtractor(s).
 	inferred  18 D-type flip-flop(s).
-Unit <counter_6> synthesized.
+Unit <counter_7> synthesized.
 
-Synthesizing Unit <seven_seg_7>.
-    Related source file is "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/seven_seg_7.v".
+Synthesizing Unit <seven_seg_8>.
+    Related source file is "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/seven_seg_8.v".
     Found 16x7-bit Read Only RAM for signal <segs>
     Summary:
 	inferred   1 RAM(s).
-Unit <seven_seg_7> synthesized.
+Unit <seven_seg_8> synthesized.
 
-Synthesizing Unit <decoder_8>.
-    Related source file is "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/decoder_8.v".
+Synthesizing Unit <decoder_9>.
+    Related source file is "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/decoder_9.v".
     Summary:
 	no macro.
-Unit <decoder_8> synthesized.
+Unit <decoder_9> synthesized.
 
 Synthesizing Unit <multi_dec_ctr_4>.
     Related source file is "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/multi_dec_ctr_4.v".
@@ -127,14 +144,14 @@ INFO:Xst:3210 - "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/p
 	no macro.
 Unit <multi_dec_ctr_4> synthesized.
 
-Synthesizing Unit <decimal_counter_9>.
-    Related source file is "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/decimal_counter_9.v".
+Synthesizing Unit <decimal_counter_10>.
+    Related source file is "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/decimal_counter_10.v".
     Found 4-bit register for signal <M_val_q>.
     Found 4-bit adder for signal <M_val_q[3]_GND_9_o_add_2_OUT> created at line 28.
     Summary:
 	inferred   1 Adder/Subtractor(s).
 	inferred   4 D-type flip-flop(s).
-Unit <decimal_counter_9> synthesized.
+Unit <decimal_counter_10> synthesized.
 
 Synthesizing Unit <counter_5>.
     Related source file is "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/counter_5.v".
@@ -145,27 +162,108 @@ Synthesizing Unit <counter_5>.
 	inferred  25 D-type flip-flop(s).
 Unit <counter_5> synthesized.
 
+Synthesizing Unit <aluLogic_6>.
+    Related source file is "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/aluLogic_6.v".
+    Summary:
+	inferred   1 Multiplexer(s).
+Unit <aluLogic_6> synthesized.
+
+Synthesizing Unit <aluADD_11>.
+    Related source file is "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/aluADD_11.v".
+WARNING:Xst:647 - Input <alufn<5:2>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 9-bit subtractor for signal <over> created at line 32.
+    Found 9-bit subtractor for signal <GND_12_o_a[7]_sub_9_OUT> created at line 40.
+    Found 9-bit adder for signal <n0040> created at line 28.
+    Found 8x8-bit multiplier for signal <n0033> created at line 36.
+    Found 8x8-bit multiplier for signal <n0035> created at line 40.
+    Found 9-bit 4-to-1 multiplexer for signal <temp> created at line 26.
+    Summary:
+	inferred   2 Multiplier(s).
+	inferred   2 Adder/Subtractor(s).
+	inferred   6 Multiplexer(s).
+Unit <aluADD_11> synthesized.
+
+Synthesizing Unit <div_8u_8u>.
+    Related source file is "".
+    Found 16-bit adder for signal <n0292> created at line 0.
+    Found 16-bit adder for signal <GND_14_o_b[7]_add_1_OUT> created at line 0.
+    Found 15-bit adder for signal <n0296> created at line 0.
+    Found 15-bit adder for signal <GND_14_o_b[7]_add_3_OUT> created at line 0.
+    Found 14-bit adder for signal <n0300> created at line 0.
+    Found 14-bit adder for signal <GND_14_o_b[7]_add_5_OUT> created at line 0.
+    Found 13-bit adder for signal <n0304> created at line 0.
+    Found 13-bit adder for signal <GND_14_o_b[7]_add_7_OUT> created at line 0.
+    Found 12-bit adder for signal <n0308> created at line 0.
+    Found 12-bit adder for signal <GND_14_o_b[7]_add_9_OUT> created at line 0.
+    Found 11-bit adder for signal <n0312> created at line 0.
+    Found 11-bit adder for signal <GND_14_o_b[7]_add_11_OUT> created at line 0.
+    Found 10-bit adder for signal <n0316> created at line 0.
+    Found 10-bit adder for signal <GND_14_o_b[7]_add_13_OUT> created at line 0.
+    Found 9-bit adder for signal <n0320> created at line 0.
+    Found 9-bit adder for signal <GND_14_o_b[7]_add_15_OUT> created at line 0.
+    Found 16-bit comparator lessequal for signal <BUS_0001> created at line 0
+    Found 15-bit comparator lessequal for signal <BUS_0002> created at line 0
+    Found 14-bit comparator lessequal for signal <BUS_0003> created at line 0
+    Found 13-bit comparator lessequal for signal <BUS_0004> created at line 0
+    Found 12-bit comparator lessequal for signal <BUS_0005> created at line 0
+    Found 11-bit comparator lessequal for signal <BUS_0006> created at line 0
+    Found 10-bit comparator lessequal for signal <BUS_0007> created at line 0
+    Found 9-bit comparator lessequal for signal <BUS_0008> created at line 0
+    Found 8-bit comparator lessequal for signal <BUS_0009> created at line 0
+    Summary:
+	inferred  16 Adder/Subtractor(s).
+	inferred   9 Comparator(s).
+	inferred  57 Multiplexer(s).
+Unit <div_8u_8u> synthesized.
+
 =========================================================================
 HDL Synthesis Report
 
 Macro Statistics
 # RAMs                                                 : 1
  16x7-bit single-port Read Only RAM                    : 1
-# Adders/Subtractors                                   : 7
+# Multipliers                                          : 2
+ 8x8-bit multiplier                                    : 2
+# Adders/Subtractors                                   : 25
+ 10-bit adder                                          : 2
+ 11-bit adder                                          : 2
+ 12-bit adder                                          : 2
+ 13-bit adder                                          : 2
+ 14-bit adder                                          : 2
+ 15-bit adder                                          : 2
+ 16-bit adder                                          : 2
  18-bit adder                                          : 1
  25-bit adder                                          : 1
  4-bit adder                                           : 5
+ 9-bit adder                                           : 2
+ 9-bit addsub                                          : 1
+ 9-bit subtractor                                      : 1
 # Registers                                            : 8
  1-bit register                                        : 1
  18-bit register                                       : 1
  25-bit register                                       : 1
  4-bit register                                        : 5
+# Comparators                                          : 9
+ 10-bit comparator lessequal                           : 1
+ 11-bit comparator lessequal                           : 1
+ 12-bit comparator lessequal                           : 1
+ 13-bit comparator lessequal                           : 1
+ 14-bit comparator lessequal                           : 1
+ 15-bit comparator lessequal                           : 1
+ 16-bit comparator lessequal                           : 1
+ 8-bit comparator lessequal                            : 1
+ 9-bit comparator lessequal                            : 1
+# Multiplexers                                         : 64
+ 1-bit 2-to-1 multiplexer                              : 56
+ 8-bit 2-to-1 multiplexer                              : 2
+ 9-bit 2-to-1 multiplexer                              : 6
 # Logic shifters                                       : 1
  31-bit shifter logical right                          : 1
 # Tristates                                            : 6
  1-bit tristate buffer                                 : 6
 
 =========================================================================
+INFO:Xst:1767 - HDL ADVISOR - Resource sharing has identified that some arithmetic operations in this design can share the same physical resources for reduced device utilization. For improved clock frequency you may try to disable resource sharing.
 
 =========================================================================
 *                       Advanced HDL Synthesis                          *
@@ -176,15 +274,15 @@ Synthesizing (advanced) Unit <counter_5>.
 The following registers are absorbed into counter <M_ctr_q>: 1 register on signal <M_ctr_q>.
 Unit <counter_5> synthesized (advanced).
 
-Synthesizing (advanced) Unit <counter_6>.
+Synthesizing (advanced) Unit <counter_7>.
 The following registers are absorbed into counter <M_ctr_q>: 1 register on signal <M_ctr_q>.
-Unit <counter_6> synthesized (advanced).
+Unit <counter_7> synthesized (advanced).
 
-Synthesizing (advanced) Unit <decimal_counter_9>.
+Synthesizing (advanced) Unit <decimal_counter_10>.
 The following registers are absorbed into counter <M_val_q>: 1 register on signal <M_val_q>.
-Unit <decimal_counter_9> synthesized (advanced).
+Unit <decimal_counter_10> synthesized (advanced).
 
-Synthesizing (advanced) Unit <seven_seg_7>.
+Synthesizing (advanced) Unit <seven_seg_8>.
 INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram_segs> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
     -----------------------------------------------------------------------
     | ram_type           | Distributed                         |          |
@@ -196,7 +294,7 @@ INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram_segs> will be implemented on LUTs ei
     |     diA            | connected to signal <GND>           |          |
     |     doA            | connected to signal <segs>          |          |
     -----------------------------------------------------------------------
-Unit <seven_seg_7> synthesized (advanced).
+Unit <seven_seg_8> synthesized (advanced).
 
 =========================================================================
 Advanced HDL Synthesis Report
@@ -204,14 +302,33 @@ Advanced HDL Synthesis Report
 Macro Statistics
 # RAMs                                                 : 1
  16x7-bit single-port distributed Read Only RAM        : 1
-# Adders/Subtractors                                   : 1
+# Multipliers                                          : 2
+ 8x8-bit multiplier                                    : 2
+# Adders/Subtractors                                   : 11
  4-bit adder                                           : 1
+ 8-bit adder carry in                                  : 8
+ 9-bit addsub                                          : 1
+ 9-bit subtractor                                      : 1
 # Counters                                             : 6
  18-bit up counter                                     : 1
  25-bit up counter                                     : 1
  4-bit up counter                                      : 4
 # Registers                                            : 5
  Flip-Flops                                            : 5
+# Comparators                                          : 9
+ 10-bit comparator lessequal                           : 1
+ 11-bit comparator lessequal                           : 1
+ 12-bit comparator lessequal                           : 1
+ 13-bit comparator lessequal                           : 1
+ 14-bit comparator lessequal                           : 1
+ 15-bit comparator lessequal                           : 1
+ 16-bit comparator lessequal                           : 1
+ 8-bit comparator lessequal                            : 1
+ 9-bit comparator lessequal                            : 1
+# Multiplexers                                         : 64
+ 1-bit 2-to-1 multiplexer                              : 56
+ 8-bit 2-to-1 multiplexer                              : 2
+ 9-bit 2-to-1 multiplexer                              : 6
 # Logic shifters                                       : 1
  31-bit shifter logical right                          : 1
 
@@ -222,6 +339,10 @@ Macro Statistics
 =========================================================================
 
 Optimizing unit <mojo_top_0> ...
+
+Optimizing unit <aluADD_11> ...
+
+Optimizing unit <div_8u_8u> ...
 INFO:Xst:2261 - The FF/Latch <ctr/M_ctr_q_16> in Unit <mojo_top_0> is equivalent to the following FF/Latch, which will be removed : <seg/ctr/M_ctr_q_16> 
 INFO:Xst:2261 - The FF/Latch <seg/ctr/M_ctr_q_0> in Unit <mojo_top_0> is equivalent to the following FF/Latch, which will be removed : <ctr/M_ctr_q_0> 
 INFO:Xst:2261 - The FF/Latch <seg/ctr/M_ctr_q_1> in Unit <mojo_top_0> is equivalent to the following FF/Latch, which will be removed : <ctr/M_ctr_q_1> 
@@ -243,7 +364,7 @@ INFO:Xst:2261 - The FF/Latch <seg/ctr/M_ctr_q_17> in Unit <mojo_top_0> is equiva
 
 Mapping all equations...
 Building and optimizing final netlist ...
-Found area constraint ratio of 100 (+ 0) on block mojo_top_0, actual ratio is 1.
+Found area constraint ratio of 100 (+ 0) on block mojo_top_0, actual ratio is 4.
 
 Final Macro Processing ...
 
@@ -294,6 +415,6 @@ Speed Grade: -2
    Minimum period: 4.617ns (Maximum Frequency: 216.591MHz)
    Minimum input arrival time before clock: 3.526ns
    Maximum output required time after clock: 7.306ns
-   Maximum combinational path delay: 4.921ns
+   Maximum combinational path delay: 41.158ns
 
 =========================================================================

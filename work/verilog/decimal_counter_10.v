@@ -4,7 +4,7 @@
    This is a temporary file and any changes made to it will be destroyed.
 */
 
-module decimal_counter_9 (
+module decimal_counter_10 (
     input clk,
     input rst,
     input inc,
