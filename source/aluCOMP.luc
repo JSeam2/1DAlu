@@ -1,10 +1,21 @@
-module aluCOMP (
-    input clk,  // clock
-    input rst,  // reset
-    output out
-  ) {
-
-  always {
-    out = 0;
+module aluCMP (
+    input clk, //clock
+    input rst, //reset
+    input alufn[6],
+    input z[1],
+    input n[1],
+    input v[1],
+    output out[8]
+)
+{
+ always {
+  case(alufn[2:1]){
+    b01: Tout = z; //A = B
+    b10: Tout = n ^ v; //A < B
+    b11: Tout = z + (n^v); // A <=B
+    default: out = b00000000;
   }
+  out[7:1] = 7b0;
+  out[0] = Tout;
+ }
 }
