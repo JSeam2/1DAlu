@@ -11,13 +11,19 @@ module seven_seg (
       2: segs = 7b1011011;
       3: segs = 7b1001111;
       4: segs = 7b1100110;
-      5: segs = 7b1101101;
+      5: segs = 7b1101101;  // or S
       6: segs = 7b1111101;
       7: segs = 7b0000111;
-      8: segs = 7b1111111;
+      8: segs = 7b1111111;  // or B
       9: segs = 7b1100111;
-      20: segs = 7b1011100; // o 
-      30: segs = 7b0000000; // blank
+        
+      10: segs = 7b0000000; // blank
+      11: segs = 7b1011100; // o 
+      12: segs = 7b1110111; // A
+      13: segs = 7b0111001; // C
+      14: segs = 7b1111001; // E
+      15: segs = 7b1010100; // n
+      16: segs = 7b1011110; // d    
       default: segs = 7b0000000;
     }
   }

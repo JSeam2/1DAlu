@@ -6,42 +6,120 @@ module mojo_top (
     output avr_rx,          // AVR RX (FPGA TX)
     output io_led [3][8],   // LEDs on IO Shield
     output io_seg [8],      // 7-segment LEDs on IO Shield
-    output io_sel [4],
+    output io_sel [4],      // Select 7-segment LED
+    input io_button [5],     // 5 io button 
     input io_dip [3][8]     // DIP switches on IO Shield
   ) {
   
   sig rst;                  // reset signal
+  
   
   .clk(clk) {
     // The reset conditioner is used to synchronize the reset signal to the FPGA
     // clock. This ensures the entire FPGA comes out of reset at the same time.
     reset_conditioner reset_cond;
     .rst(rst) {
-      multi_seven_seg multi;
-      counter ctr (#SIZE(3), #DIV(16));  //for led seg
+      // Counter to cycle through and select led segment
+      counter ctr (#SIZE(3), #DIV(16));  
+      
+      // dff to time each state transition
+      dff counter[28];
+      
+      // Finite state machine with all our test cases
+      fsm testing = {NORMAL,
+                     ADDER_ADD0, ADDER_ADD1, 
+                     ADDER_SUB2, ADDER_SUB3, 
+                     ADDER_MUL4,
+                     ADDER_MOD5,
+                     ADDER_ERROR6,
+                     BOOL_AND0, BOOL_OR1, BOOL_XOR2, BOOL_ALDR3, BOOL_ERROR4,
+                     SHIFT_SHL0, SHIFT_SHR1, SHIFT_SRA2, SHIFT_ERROR3,                                   
+                     COMP_EQ0, COMP_EQ1,
+                     COMP_LT2, COMP_LT3,
+                     COMP_LE4, COMP_LE5,
+                     COMP_ERROR6 };
 
     }
   }
   
+  
+  // Modules we use for the board
   aluLogic alu;
-  binToDec btd;
-  seven_seg num3; //Indicate overflows
+  seven_seg num3;
   seven_seg num2;
   seven_seg num1;
   seven_seg num0;
   
+  const T = 27;
+  
+  // ===============================================================
+  // Usage Instructions
+  // ===============================================================
+  // On the IO SHIELD:
+  // There are 3 segments of dip switches
+  // Left is used for ALU OPCODES only switches 3, 4, 5, 6, 7, 8 are used
+  // Middle is A
+  // Right is B
+  // 
+  // There are 3 segments of leds
+  // Left displays binary result from alu
+  // Middle displays A input
+  // Right displays B input
+  //
+  // The 7seg leds are used to display error messages and overflows
+  // More information is found in testing instructions found below
+  //
+  // ===============================================================
+  // ALU OPCODES
+  // ===============================================================
+  // 
+  // ADD            000000
+  // SUB            000001
+  // MUL            000010
+  // MOD            000011
+  // A AND B        011000
+  // A OR  B        011110
+  // A XOR B        010110
+  // "A" LDR        011010
+  // ~A AND B       010100
+  // "B" LDR        011100
+  // A AND ~B       010010
+  // A NOR B        010001
+  // A XNOR B       011001
+  // ~A             010101
+  // ~A OR B        011101
+  // ~B             010011
+  // A OR ~B        011011
+  // A NAND B       010111
+  // ALL 1          011111
+  // SHL            100000
+  // SHR            100001
+  // SRA            100011
+  // CMPEQ          110011
+  // CMPLT          110101
+  // CMPLE          110111
+  // 
+  
+  
   always {
     reset_cond.in = ~rst_n;   // input raw inverted reset signal
     rst = reset_cond.out;     // conditioned reset
-    
-
     spi_miso = bz;            // not using SPI
     spi_channel = bzzzz;      // not using flags
     avr_rx = bz;              // not using serial port
+       
+        
+    // Display overflow on 7 seg
+    // Default blank digit for all 7 seg
+    num0.char = d10;
+    num1.char = d10;
+    num2.char = d10;
+    num3.char = d10;
     
     // connect the DIP switches to the LEDs    
     io_led[0][7:0] = io_dip[0][7:0];   
     io_led[1][7:0] = io_dip[1][7:0];
+    
     
     // connect the DIP switches to the alu functions
     alu.b[7:0] = io_dip[0][7:0];
@@ -50,34 +128,655 @@ module mojo_top (
     
     // Displaying data
     io_led[2][7:0] = alu.aluOUT[7:0];
-    btd.value = alu.aluOUT[7:0];
-    //num2.char = btd.digits[2][2];
-    //num1.char = btd.digits[2][1];
-    //num0.char = btd.digits[2][0];
-    
-    multi.values = btd.digits;
-   
     
     
-    // Display overflow 
-    num3.char = 30;
+    // display an "o" on 7seg if overflow is detected
     if(alu.v == 1){
-      num3.char = 20;
-      }
+      // negative overflow
+      num2.char = d11;
+      }    
     
     if(alu.overflow == 1){
-      num3.char = 20;
+      // positive overflow
+      num2.char = d11;
       }
-   
+
+    
+    // Select 7 seg to display on   
     case(ctr.value){
-      3: 
-        io_seg=~num3.segs;
+      0:
+        // right most 7 seg 
+        io_seg = ~num0.segs;
+        io_sel = ~4b0001;
+      
+      1:
+        io_seg = ~num1.segs;
+        io_sel = ~4b0010;
+       
+      2:
+        io_seg = ~num2.segs;
+        io_sel = ~4b0100; 
+        
+      3:
+        // left most 7 seg 
+        io_seg = ~num3.segs;
         io_sel = ~4b1000;
         
       default:
-        io_seg=~num0.segs;
-        io_sel = ~4b1;                
+        io_seg = ~num3.segs;
+        io_sel = ~4b1000;                
+      }
+    
+    // ===============================================================
+    // Testing Instructions
+    // ===============================================================
+    // 1) Start Test by pressing CENTER,
+    // 
+    // NOTES:
+    // Number at the right hand side correspond to fpga 7seg number at right
+    // 
+    // ERROR MESSAGES:
+    // E:    indicates error
+    // o:    indicates overflow
+    // End:  indicates we have reached the end of test cases
+    //
+    // MODES DISPLAYED:
+    // <BLANK>   Indicates Normal mode
+    // A         Indicates we are using ALU Adder module
+    // B         Indicates we are using ALU Bool module
+    // C         Indicates we are using ALU Comp module
+    // S         Indicates we are using ALU Shift module 
+    //
+    //----------------------------------------------------------------
+    
+    
+    case (testing.q) {
+      testing.NORMAL:
+        // NORMAL mode
+        // Run the test suite when the center button is pressed
+        counter.d = 0;
+        
+        // connect the DIP switches to the LEDs    
+        io_led[0][7:0] = io_dip[0][7:0];   
+        io_led[1][7:0] = io_dip[1][7:0];
+    
+    
+        // connect the DIP switches to the alu functions
+        alu.b[7:0] = io_dip[0][7:0];
+        alu.a[7:0] = io_dip[1][7:0];
+        alu.alufn[5:0] = io_dip[2][5:0];
+    
+        // Displaying data
+        io_led[2][7:0] = alu.aluOUT[7:0];    
+        
+        if (io_button[1] == 1){
+          testing.d = testing.ADDER_ADD0;  
+          }
+        
+      
+          
+      testing.ADDER_ADD0:
+        // Test case ADD0
+        // Test for normal addition
+        // 1 + 1 = 2
+        // 0000 0001 + 0000 0001 = 0000 0010
+        
+        alu.alufn = 6b0; // ADD opcode
+        alu.b = 8b1;     // b = 1 
+        alu.a = 8b1;     // a = 1
+        
+        // Displaying data
+        // io led
+        io_led[0][7:0] = 8b1;
+        io_led[1][7:0] = 8b1;
+        io_led[2][7:0] = alu.aluOUT[7:0];
+        
+        // display A for adder on 7 seg
+        num3.char = d12;
+        num0.char = d0;
+        
+        // move to next state
+        counter.d = counter.q+1;
+        if(counter.q[T] == 1){
+          counter.d = 0;
+          testing.d = testing.ADDER_ADD1; 
+          }
+        
+
+        
+      testing.ADDER_ADD1:
+        // Test case ADD1
+        // Test for positive overflow
+        // 65 + 64 = 128 => -127 (postive overflow)
+        // 0100 0001 + 0100 0000 = 1000 0001 
+
+        alu.alufn = 6b0;        // ADD opcode
+        alu.b = 8b01000000;     // b = 64
+        alu.a = 8b01000001;     // a = 65
+        
+        // Displaying data
+        // io led 
+        io_led[0][7:0] = 8b01000001;
+        io_led[1][7:0] = 8b01000000;
+        
+        io_led[2][7:0] = alu.aluOUT[7:0];
+        
+        // display A for adder on 7 seg
+        num3.char = d12;
+        num0.char = d1;
+          
+        // move to next state
+        counter.d = counter.q+1;
+        if(counter.q[T] == 1){
+          counter.d = 0;
+          testing.d = testing.ADDER_SUB2; 
+          }
+      
+        
+            
+      testing.ADDER_SUB2:
+        // Test Case SUB0      
+        // 4 - 2 = 2 
+        // 0000 0100 + 0000 0010 = 0000 0010
+        
+        alu.alufn = 6b1; // SUB Opcode
+        alu.b = 8b10;
+        alu.a = 8b100;
+        
+      
+        // Displaying data
+        // io led
+        io_led[0][7:0] = 8b10;
+        io_led[1][7:0] = 8b100;
+        io_led[2][7:0] = alu.aluOUT[7:0];    
+
+        // display A for adder on 7 seg
+        num3.char = d12;  
+        num0.char = d2;
+        
+        // move to next state
+        counter.d = counter.q+1;
+        if(counter.q[T] == 1){
+          counter.d = 0;
+          testing.d = testing.ADDER_SUB3; 
+          }
+        
+      testing.ADDER_SUB3:
+        // Test Case SUB0      
+        // -74 - 70 = -144 => 112
+        // 1011 0110 - 0100 0110 = 0111 0000
+        
+        alu.alufn = 6b1; // SUB Opcode
+        alu.b = 8b1000110;  // b = 70
+        alu.a = 8b10110110; // a = -74
+        
+      
+        // Displaying data
+        // io led
+        io_led[0][7:0] = 8b1000110;
+        io_led[1][7:0] = 8b10110110;
+        io_led[2][7:0] = alu.aluOUT[7:0];    
+
+        // display A for adder on 7 seg
+        num3.char = d12;
+        num0.char = d3;
+        
+        // move to next state
+        counter.d = counter.q+1;
+        if(counter.q[T] == 1){
+          counter.d = 0;
+          testing.d = testing.ADDER_MUL4; 
+          }
+        
+        
+      testing.ADDER_MUL4:
+        // Test Case MUL0      
+        // 2 * 2 = 4 
+        // 0000 0010  0000 0010 = 0000 0100
+        
+        alu.alufn = 6b10; // MUL Opcode
+        alu.b = 8b10;  // b = 2
+        alu.a = 8b10; // a = 2
+        
+      
+        // Displaying data
+        // io led
+        io_led[0][7:0] = 8b10;
+        io_led[1][7:0] = 8b10;
+        io_led[2][7:0] = alu.aluOUT[7:0];    
+
+        // display A for adder on 7 seg
+        num3.char = d12;
+        num0.char = d4;
+        
+        // move to next state
+        counter.d = counter.q+1;
+        if(counter.q[T] == 1){
+          counter.d = 0;
+          testing.d = testing.ADDER_MOD5; 
+          }
+        
+      testing.ADDER_MOD5:
+        // Test Case MOD0      
+        // 2 % 4 = 2 
+        // 0000 0010 % 0000 0100 = 0000 0010
+        
+        alu.alufn = 6b11; // MOD Opcode
+        alu.b = 8b100;  // b = 4
+        alu.a = 8b10; // a = 2
+        
+      
+        // Displaying data
+        // io led
+        io_led[0][7:0] = 8b100;
+        io_led[1][7:0] = 8b10;
+        io_led[2][7:0] = alu.aluOUT[7:0];    
+
+        // display A for adder on 7 seg
+        num3.char = d12;
+        num0.char = d5;
+        
+        // move to next state
+        counter.d = counter.q+1;
+        if(counter.q[T] == 1){
+          counter.d = 0;
+          testing.d = testing.ADDER_ERROR6;                    
+        }
+        
+      testing.ADDER_ERROR6:
+        // Test Case ERROR     
+        // 2 + 4 != 5
+        // 0000 0010 + 0000 0100 != 0000 0101
+        
+        alu.alufn = 6b0; // MOD Opcode
+        alu.b = 8b100;  // b = 4
+        alu.a = 8b10; // a = 2
+        
+      
+        // Displaying data
+        // io led
+        io_led[0][7:0] = 8b100;
+        io_led[1][7:0] = 8b10;
+        io_led[2][7:0] = alu.aluOUT[7:0] + 1;    
+
+        // display A for adder on 7 seg
+        // display err
+        num3.char = d12;
+        num2.char = d14;
+        num0.char = d6;
+        
+        // move to next state
+        counter.d = counter.q+1;
+        if(counter.q[T] == 1){
+          counter.d = 0;
+          testing.d = testing.BOOL_AND0;                    
+        }
+        
+        
+    testing.BOOL_AND0:
+      // AND
+      // 0101 AND 0011 = 0001
+      alu.alufn = 6b11000; // AND opcode 
+      alu.b = 8b0011;
+      alu.a = 8b0101;
+        
+      // Displaying data
+      // io led
+      io_led[0][7:0] = 8b0011;
+      io_led[1][7:0] = 8b0101;
+      io_led[2][7:0] = alu.aluOUT[7:0];
+        
+      // Display B for Boolean
+      num3.char = d8;
+      num0.char = d0;  
+        
+      counter.d = counter.q+1;
+      if(counter.q[T] == 1){
+        counter.d = 0;
+        testing.d = testing.BOOL_OR1;                    
       }
         
+        
+    testing.BOOL_OR1:
+      // OR
+      // 0101 OR 0011 = 0111
+      alu.alufn = 6b11110; // OR opcode 
+      alu.b = 8b0011;
+      alu.a = 8b0101;
+        
+      // Displaying data
+      // io led
+      io_led[0][7:0] = 8b0011;
+      io_led[1][7:0] = 8b0101;
+      io_led[2][7:0] = alu.aluOUT[7:0];
+        
+      // Display B for Boolean
+      num3.char = d8;
+      num0.char = d1;  
+        
+      counter.d = counter.q+1;
+      if(counter.q[T] == 1){
+        counter.d = 0;
+        testing.d = testing.BOOL_XOR2;                    
+      }      
+        
+    testing.BOOL_XOR2:
+      // XOR
+      // 0101 XOR 0011 = 0110
+      alu.alufn = 6b10110; // XOR opcode 
+      alu.b = 8b0011;
+      alu.a = 8b0101;
+        
+      // Displaying data
+      // io led
+      io_led[0][7:0] = 8b0011;
+      io_led[1][7:0] = 8b0101;
+      io_led[2][7:0] = alu.aluOUT[7:0];
+        
+      // Display B for Boolean
+      num3.char = d8;
+      num0.char = d2;  
+        
+      counter.d = counter.q+1;
+      if(counter.q[T] == 1){
+        counter.d = 0;
+        testing.d = testing.BOOL_ALDR3;                    
+      }
+        
+    testing.BOOL_ALDR3:
+      // ALDR
+      // 0101 ALDR 0011 = 0101
+      alu.alufn = 6b11010; // ALDR opcode 
+      alu.b = 8b0011;
+      alu.a = 8b0101;
+        
+      // Displaying data
+      // io led
+      io_led[0][7:0] = 8b0011;
+      io_led[1][7:0] = 8b0101;
+      io_led[2][7:0] = alu.aluOUT[7:0];
+        
+      // Display B for Boolean
+      num3.char = d8;
+      num0.char = d3;  
+        
+      counter.d = counter.q+1;
+      if(counter.q[T] == 1){
+        counter.d = 0;
+        testing.d = testing.BOOL_ERROR4;                    
+      }
+        
+    testing.BOOL_ERROR4:
+      // ERROR AND
+      // 0101 AND 0011 != 0010
+      alu.alufn = 6b11000; // AND opcode 
+      alu.b = 8b0011;
+      alu.a = 8b0101;
+        
+      // Displaying data
+      // io led
+      io_led[0][7:0] = 8b0011;
+      io_led[1][7:0] = 8b0101;
+      io_led[2][7:0] = alu.aluOUT[7:0] + 1;
+        
+      // Display B for Boolean
+      num3.char = d8;
+      num2.char = d14;
+      num0.char = d4;  
+        
+      counter.d = counter.q+1;
+      if(counter.q[T] == 1){
+        counter.d = 0;
+        testing.d = testing.SHIFT_SHL0;                    
+      }
+        
+    testing.SHIFT_SHL0:
+      // SHL
+      //  8b1 << 4 = 8b00010000
+      alu.alufn = 6b100000; // SHL opcode 
+      alu.b = 8b1;
+      alu.a = 8b100;
+        
+      // Displaying data
+      // io led
+      io_led[0][7:0] = 8b1;
+      io_led[1][7:0] = 8b100;
+      io_led[2][7:0] = alu.aluOUT[7:0];
+        
+      // Display S for Shift
+      num3.char = d5;
+      num0.char = d0;  
+        
+      counter.d = counter.q+1;
+      if(counter.q[T] == 1){
+        counter.d = 0;
+        testing.d = testing.SHIFT_SHR1;                    
+      }
+        
+    testing.SHIFT_SHR1:
+      // SHR
+      // 8b01000000 >> 4 = 8b00000100
+      alu.alufn = 6b100001; // SHR opcode 
+      alu.b = 8b01000000;
+      alu.a = 8b100;
+        
+      // Displaying data
+      // io led
+      io_led[0][7:0] = 8b01000000;
+      io_led[1][7:0] = 8b100;
+      io_led[2][7:0] = alu.aluOUT[7:0];
+        
+      // Display S for shift
+      num3.char = d5;
+      num0.char = d1;  
+        
+      counter.d = counter.q+1;
+      if(counter.q[T] == 1){
+        counter.d = 0;
+        testing.d = testing.SHIFT_SRA2;                    
+      }
+        
+    testing.SHIFT_SRA2:
+      // SRA
+      // 8b11000000 >> 4 = 8b11111100
+      alu.alufn = 6b100011; // SRA opcode 
+      alu.b = 8b01000000;
+      alu.a = 8b100;
+        
+      // Displaying data
+      // io led
+      io_led[0][7:0] = 8b01000000;
+      io_led[1][7:0] = 8b100;
+      io_led[2][7:0] = alu.aluOUT[7:0];
+        
+      // Display S for SHIFt
+      num3.char = d5;
+      num0.char = d2;  
+        
+      counter.d = counter.q+1;
+      if(counter.q[T] == 1){
+        counter.d = 0;
+        testing.d = testing.SHIFT_ERROR3;                    
+      }
+    
+    testing.SHIFT_ERROR3:
+      // ERROR
+      // 8b11000000 >> 4 = 8b11111100
+      alu.alufn = 6b100000; // SRA opcode 
+      alu.b = 8b1;
+      alu.a = 8b100;
+        
+      // Displaying data
+      // io led
+      io_led[0][7:0] = 8b1;
+      io_led[1][7:0] = 8b100;
+      io_led[2][7:0] = alu.aluOUT[7:0] + 1;
+        
+      // Display S for SHIFt
+      num3.char = d5;
+      num2. char = d14;
+      num0.char = d3;  
+        
+      counter.d = counter.q+1;
+      if(counter.q[T] == 1){
+        counter.d = 0;
+        testing.d = testing.COMP_EQ0;                    
+      }
+      
+    testing.COMP_EQ0:
+      // 1 == 1 
+      alu.alufn = 6b110011; 
+      alu.b = 8b1;
+      alu.a = 8b1;
+        
+      // Displaying data
+      // io led
+      io_led[0][7:0] = 8b1;
+      io_led[1][7:0] = 8b1;
+      io_led[2][7:0] = alu.aluOUT[7:0];
+        
+      // Display S for SHIFt
+      num3.char = d13;
+      num0.char = d0;  
+        
+      counter.d = counter.q+1;
+      if(counter.q[T] == 1){
+        counter.d = 0;
+        testing.d = testing.COMP_EQ1;                    
+      }
+        
+    testing.COMP_EQ1:
+      // 1 != 2 
+      alu.alufn = 6b110011; 
+      alu.b = 8b10;
+      alu.a = 8b1;
+        
+      // Displaying data
+      // io led
+      io_led[0][7:0] = 8b10;
+      io_led[1][7:0] = 8b1;
+      io_led[2][7:0] = alu.aluOUT[7:0];
+        
+      // Display S for SHIFt
+      num3.char = d13;
+      num0.char = d1;  
+        
+      counter.d = counter.q+1;
+      if(counter.q[T] == 1){
+        counter.d = 0;
+        testing.d = testing.COMP_LT2;                                                                                 
+      }
+        
+    testing.COMP_LT2:
+      // 1 < 2 
+      alu.alufn = 6b110101; 
+      alu.b = 8b10;
+      alu.a = 8b1;
+        
+      // Displaying data
+      // io led
+      io_led[0][7:0] = 8b10;
+      io_led[1][7:0] = 8b1;
+      io_led[2][7:0] = alu.aluOUT[7:0];
+        
+      // Display S for SHIFt
+      num3.char = d13;
+      num0.char = d2;  
+        
+      counter.d = counter.q+1;
+      if(counter.q[T] == 1){
+        counter.d = 0;
+        testing.d = testing.COMP_LT3;                                                                                 
+      }
+        
+    testing.COMP_LT3:
+      // 3 < 2 
+      alu.alufn = 6b110101; 
+      alu.b = 8b10;
+      alu.a = 8b11;
+        
+      // Displaying data
+      // io led
+      io_led[0][7:0] = 8b10;
+      io_led[1][7:0] = 8b11;
+      io_led[2][7:0] = alu.aluOUT[7:0];
+        
+      // Display S for SHIFt
+      num3.char = d13;
+      num0.char = d3;  
+        
+      counter.d = counter.q+1;
+      if(counter.q[T] == 1){
+        counter.d = 0;
+        testing.d = testing.COMP_LE4;                                                                                 
+      }
+        
+    testing.COMP_LE4:
+      // 2 <= 2 
+      alu.alufn = 6b110111; 
+      alu.b = 8b10;
+      alu.a = 8b10;
+        
+      // Displaying data
+      // io led
+      io_led[0][7:0] = 8b10;
+      io_led[1][7:0] = 8b10;
+      io_led[2][7:0] = alu.aluOUT[7:0];
+        
+      // Display S for SHIFt
+      num3.char = d13;
+      num0.char = d4;  
+        
+      counter.d = counter.q+1;
+      if(counter.q[T] == 1){
+        counter.d = 0;
+        testing.d = testing.COMP_LE5;                                                                                 
+      }
+        
+    testing.COMP_LE5:
+      // 3 <= 2 
+      alu.alufn = 6b110111; 
+      alu.b = 8b10;
+      alu.a = 8b11;
+        
+      // Displaying data
+      // io led
+      io_led[0][7:0] = 8b10;
+      io_led[1][7:0] = 8b11;
+      io_led[2][7:0] = alu.aluOUT[7:0];
+        
+      // Display S for SHIFt
+      num3.char = d13;
+      num0.char = d5;  
+        
+      counter.d = counter.q+1;
+      if(counter.q[T] == 1){
+        counter.d = 0;
+        testing.d = testing.COMP_ERROR6;                                                                                 
+      }
+        
+    testing.COMP_ERROR6:
+      // 2 == 2 -> FALSE 
+      alu.alufn = 6b110011; 
+      alu.b = 8b10;
+      alu.a = 8b10;
+        
+      // Displaying data
+      // io led
+      io_led[0][7:0] = 8b10;
+      io_led[1][7:0] = 8b11;
+      io_led[2][7:0] = alu.aluOUT[7:0] - 1;
+        
+      // Display S for SHIFt
+      num3.char = d13;
+      num1.char = d14;
+      num0.char = d6;  
+        
+      counter.d = counter.q+1;
+      if(counter.q[T] == 1){
+        counter.d = 0;
+        testing.d = testing.NORMAL;                                                                                 
+      }                      
+    }                 
   }
 }
