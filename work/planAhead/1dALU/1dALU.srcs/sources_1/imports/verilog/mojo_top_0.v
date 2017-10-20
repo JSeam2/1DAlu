@@ -34,7 +34,7 @@ module mojo_top_0 (
     .rst(rst),
     .value(M_ctr_value)
   );
-  reg [27:0] M_counter_d, M_counter_q = 1'h0;
+  reg [29:0] M_counter_d, M_counter_q = 1'h0;
   localparam NORMAL_testing = 5'd0;
   localparam ADDER_ADD0_testing = 5'd1;
   localparam ADDER_ADD1_testing = 5'd2;
@@ -109,7 +109,7 @@ module mojo_top_0 (
     .segs(M_num0_segs)
   );
   
-  localparam T = 5'h1b;
+  localparam T = 5'h1d;
   
   always @* begin
     M_testing_d = M_testing_q;
@@ -183,7 +183,7 @@ module mojo_top_0 (
         M_num3_char = 4'hc;
         M_num0_char = 1'h0;
         M_counter_d = M_counter_q + 1'h1;
-        if (M_counter_q[27+0-:1] == 1'h1) begin
+        if (M_counter_q[29+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_testing_d = ADDER_ADD1_testing;
         end
@@ -192,13 +192,13 @@ module mojo_top_0 (
         M_alu_alufn = 6'h00;
         M_alu_b = 8'h40;
         M_alu_a = 8'h41;
-        io_led[0+0+7-:8] = 8'h41;
-        io_led[8+0+7-:8] = 8'h40;
+        io_led[0+0+7-:8] = 8'h40;
+        io_led[8+0+7-:8] = 8'h41;
         io_led[16+0+7-:8] = M_alu_aluOUT[0+7-:8];
         M_num3_char = 4'hc;
         M_num0_char = 1'h1;
         M_counter_d = M_counter_q + 1'h1;
-        if (M_counter_q[27+0-:1] == 1'h1) begin
+        if (M_counter_q[29+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_testing_d = ADDER_SUB2_testing;
         end
@@ -213,7 +213,7 @@ module mojo_top_0 (
         M_num3_char = 4'hc;
         M_num0_char = 2'h2;
         M_counter_d = M_counter_q + 1'h1;
-        if (M_counter_q[27+0-:1] == 1'h1) begin
+        if (M_counter_q[29+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_testing_d = ADDER_SUB3_testing;
         end
@@ -228,7 +228,7 @@ module mojo_top_0 (
         M_num3_char = 4'hc;
         M_num0_char = 2'h3;
         M_counter_d = M_counter_q + 1'h1;
-        if (M_counter_q[27+0-:1] == 1'h1) begin
+        if (M_counter_q[29+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_testing_d = ADDER_MUL4_testing;
         end
@@ -243,7 +243,7 @@ module mojo_top_0 (
         M_num3_char = 4'hc;
         M_num0_char = 3'h4;
         M_counter_d = M_counter_q + 1'h1;
-        if (M_counter_q[27+0-:1] == 1'h1) begin
+        if (M_counter_q[29+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_testing_d = ADDER_MOD5_testing;
         end
@@ -258,7 +258,7 @@ module mojo_top_0 (
         M_num3_char = 4'hc;
         M_num0_char = 3'h5;
         M_counter_d = M_counter_q + 1'h1;
-        if (M_counter_q[27+0-:1] == 1'h1) begin
+        if (M_counter_q[29+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_testing_d = ADDER_ERROR6_testing;
         end
@@ -274,7 +274,7 @@ module mojo_top_0 (
         M_num2_char = 4'he;
         M_num0_char = 3'h6;
         M_counter_d = M_counter_q + 1'h1;
-        if (M_counter_q[27+0-:1] == 1'h1) begin
+        if (M_counter_q[29+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_testing_d = BOOL_AND0_testing;
         end
@@ -289,7 +289,7 @@ module mojo_top_0 (
         M_num3_char = 4'h8;
         M_num0_char = 1'h0;
         M_counter_d = M_counter_q + 1'h1;
-        if (M_counter_q[27+0-:1] == 1'h1) begin
+        if (M_counter_q[29+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_testing_d = BOOL_OR1_testing;
         end
@@ -304,7 +304,7 @@ module mojo_top_0 (
         M_num3_char = 4'h8;
         M_num0_char = 1'h1;
         M_counter_d = M_counter_q + 1'h1;
-        if (M_counter_q[27+0-:1] == 1'h1) begin
+        if (M_counter_q[29+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_testing_d = BOOL_XOR2_testing;
         end
@@ -319,7 +319,7 @@ module mojo_top_0 (
         M_num3_char = 4'h8;
         M_num0_char = 2'h2;
         M_counter_d = M_counter_q + 1'h1;
-        if (M_counter_q[27+0-:1] == 1'h1) begin
+        if (M_counter_q[29+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_testing_d = BOOL_ALDR3_testing;
         end
@@ -334,7 +334,7 @@ module mojo_top_0 (
         M_num3_char = 4'h8;
         M_num0_char = 2'h3;
         M_counter_d = M_counter_q + 1'h1;
-        if (M_counter_q[27+0-:1] == 1'h1) begin
+        if (M_counter_q[29+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_testing_d = BOOL_ERROR4_testing;
         end
@@ -350,52 +350,52 @@ module mojo_top_0 (
         M_num2_char = 4'he;
         M_num0_char = 3'h4;
         M_counter_d = M_counter_q + 1'h1;
-        if (M_counter_q[27+0-:1] == 1'h1) begin
+        if (M_counter_q[29+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_testing_d = SHIFT_SHL0_testing;
         end
       end
       SHIFT_SHL0_testing: begin
         M_alu_alufn = 6'h20;
-        M_alu_b = 8'h01;
-        M_alu_a = 8'h04;
-        io_led[0+0+7-:8] = 8'h01;
-        io_led[8+0+7-:8] = 8'h04;
+        M_alu_b = 8'h04;
+        M_alu_a = 8'h01;
+        io_led[0+0+7-:8] = 8'h04;
+        io_led[8+0+7-:8] = 8'h01;
         io_led[16+0+7-:8] = M_alu_aluOUT[0+7-:8];
         M_num3_char = 3'h5;
         M_num0_char = 1'h0;
         M_counter_d = M_counter_q + 1'h1;
-        if (M_counter_q[27+0-:1] == 1'h1) begin
+        if (M_counter_q[29+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_testing_d = SHIFT_SHR1_testing;
         end
       end
       SHIFT_SHR1_testing: begin
         M_alu_alufn = 6'h21;
-        M_alu_b = 8'h40;
-        M_alu_a = 8'h04;
-        io_led[0+0+7-:8] = 8'h40;
-        io_led[8+0+7-:8] = 8'h04;
+        M_alu_b = 8'h04;
+        M_alu_a = 8'h40;
+        io_led[0+0+7-:8] = 8'h04;
+        io_led[8+0+7-:8] = 8'h40;
         io_led[16+0+7-:8] = M_alu_aluOUT[0+7-:8];
         M_num3_char = 3'h5;
         M_num0_char = 1'h1;
         M_counter_d = M_counter_q + 1'h1;
-        if (M_counter_q[27+0-:1] == 1'h1) begin
+        if (M_counter_q[29+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_testing_d = SHIFT_SRA2_testing;
         end
       end
       SHIFT_SRA2_testing: begin
         M_alu_alufn = 6'h23;
-        M_alu_b = 8'h40;
-        M_alu_a = 8'h04;
-        io_led[0+0+7-:8] = 8'h40;
+        M_alu_b = 8'h04;
+        M_alu_a = 8'hc0;
+        io_led[0+0+7-:8] = 8'hc0;
         io_led[8+0+7-:8] = 8'h04;
         io_led[16+0+7-:8] = M_alu_aluOUT[0+7-:8];
         M_num3_char = 3'h5;
         M_num0_char = 2'h2;
         M_counter_d = M_counter_q + 1'h1;
-        if (M_counter_q[27+0-:1] == 1'h1) begin
+        if (M_counter_q[29+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_testing_d = SHIFT_ERROR3_testing;
         end
@@ -411,7 +411,7 @@ module mojo_top_0 (
         M_num2_char = 4'he;
         M_num0_char = 2'h3;
         M_counter_d = M_counter_q + 1'h1;
-        if (M_counter_q[27+0-:1] == 1'h1) begin
+        if (M_counter_q[29+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_testing_d = COMP_EQ0_testing;
         end
@@ -426,7 +426,7 @@ module mojo_top_0 (
         M_num3_char = 4'hd;
         M_num0_char = 1'h0;
         M_counter_d = M_counter_q + 1'h1;
-        if (M_counter_q[27+0-:1] == 1'h1) begin
+        if (M_counter_q[29+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_testing_d = COMP_EQ1_testing;
         end
@@ -441,7 +441,7 @@ module mojo_top_0 (
         M_num3_char = 4'hd;
         M_num0_char = 1'h1;
         M_counter_d = M_counter_q + 1'h1;
-        if (M_counter_q[27+0-:1] == 1'h1) begin
+        if (M_counter_q[29+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_testing_d = COMP_LT2_testing;
         end
@@ -456,7 +456,7 @@ module mojo_top_0 (
         M_num3_char = 4'hd;
         M_num0_char = 2'h2;
         M_counter_d = M_counter_q + 1'h1;
-        if (M_counter_q[27+0-:1] == 1'h1) begin
+        if (M_counter_q[29+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_testing_d = COMP_LT3_testing;
         end
@@ -471,7 +471,7 @@ module mojo_top_0 (
         M_num3_char = 4'hd;
         M_num0_char = 2'h3;
         M_counter_d = M_counter_q + 1'h1;
-        if (M_counter_q[27+0-:1] == 1'h1) begin
+        if (M_counter_q[29+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_testing_d = COMP_LE4_testing;
         end
@@ -486,7 +486,7 @@ module mojo_top_0 (
         M_num3_char = 4'hd;
         M_num0_char = 3'h4;
         M_counter_d = M_counter_q + 1'h1;
-        if (M_counter_q[27+0-:1] == 1'h1) begin
+        if (M_counter_q[29+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_testing_d = COMP_LE5_testing;
         end
@@ -501,7 +501,7 @@ module mojo_top_0 (
         M_num3_char = 4'hd;
         M_num0_char = 3'h5;
         M_counter_d = M_counter_q + 1'h1;
-        if (M_counter_q[27+0-:1] == 1'h1) begin
+        if (M_counter_q[29+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_testing_d = COMP_ERROR6_testing;
         end
@@ -511,13 +511,13 @@ module mojo_top_0 (
         M_alu_b = 8'h02;
         M_alu_a = 8'h02;
         io_led[0+0+7-:8] = 8'h02;
-        io_led[8+0+7-:8] = 8'h03;
+        io_led[8+0+7-:8] = 8'h02;
         io_led[16+0+7-:8] = M_alu_aluOUT[0+7-:8] - 1'h1;
         M_num3_char = 4'hd;
-        M_num1_char = 4'he;
+        M_num2_char = 4'he;
         M_num0_char = 3'h6;
         M_counter_d = M_counter_q + 1'h1;
-        if (M_counter_q[27+0-:1] == 1'h1) begin
+        if (M_counter_q[29+0-:1] == 1'h1) begin
           M_counter_d = 1'h0;
           M_testing_d = NORMAL_testing;
         end

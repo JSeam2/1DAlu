@@ -23,7 +23,7 @@ module mojo_top (
       counter ctr (#SIZE(3), #DIV(16));  
       
       // dff to time each state transition
-      dff counter[28];
+      dff counter[30];
       
       // Finite state machine with all our test cases
       fsm testing = {NORMAL,
@@ -50,7 +50,7 @@ module mojo_top (
   seven_seg num1;
   seven_seg num0;
   
-  const T = 27;
+  const T = 29;
   
   // ===============================================================
   // Usage Instructions
@@ -92,9 +92,9 @@ module mojo_top (
   // A OR ~B        011011
   // A NAND B       010111
   // ALL 1          011111
-  // SHL            100000
-  // SHR            100001
-  // SRA            100011
+  // A SHL B        100000
+  // A SHR B        100001
+  // A SRA B        100011
   // CMPEQ          110011
   // CMPLT          110101
   // CMPLE          110111
@@ -174,6 +174,7 @@ module mojo_top (
     // 
     // NOTES:
     // Number at the right hand side correspond to fpga 7seg number at right
+    // Errors are simulated in the test rig
     // 
     // ERROR MESSAGES:
     // E:    indicates error
@@ -256,8 +257,8 @@ module mojo_top (
         
         // Displaying data
         // io led 
-        io_led[0][7:0] = 8b01000001;
-        io_led[1][7:0] = 8b01000000;
+        io_led[0][7:0] = 8b01000000;
+        io_led[1][7:0] = 8b01000001;
         
         io_led[2][7:0] = alu.aluOUT[7:0];
         
@@ -277,7 +278,7 @@ module mojo_top (
       testing.ADDER_SUB2:
         // Test Case SUB0      
         // 4 - 2 = 2 
-        // 0000 0100 + 0000 0010 = 0000 0010
+        // 0000 0100 - 0000 0010 = 0000 0010
         
         alu.alufn = 6b1; // SUB Opcode
         alu.b = 8b10;
@@ -332,7 +333,7 @@ module mojo_top (
       testing.ADDER_MUL4:
         // Test Case MUL0      
         // 2 * 2 = 4 
-        // 0000 0010  0000 0010 = 0000 0100
+        // 0000 0010 * 0000 0010 = 0000 0100
         
         alu.alufn = 6b10; // MUL Opcode
         alu.b = 8b10;  // b = 2
@@ -508,7 +509,7 @@ module mojo_top (
         
     testing.BOOL_ERROR4:
       // ERROR AND
-      // 0101 AND 0011 != 0010
+      // 0101 AND 0011 != 0001
       alu.alufn = 6b11000; // AND opcode 
       alu.b = 8b0011;
       alu.a = 8b0101;
@@ -534,13 +535,13 @@ module mojo_top (
       // SHL
       //  8b1 << 4 = 8b00010000
       alu.alufn = 6b100000; // SHL opcode 
-      alu.b = 8b1;
-      alu.a = 8b100;
+      alu.b = 8b100;
+      alu.a = 8b1;
         
       // Displaying data
       // io led
-      io_led[0][7:0] = 8b1;
-      io_led[1][7:0] = 8b100;
+      io_led[0][7:0] = 8b100;
+      io_led[1][7:0] = 8b1;
       io_led[2][7:0] = alu.aluOUT[7:0];
         
       // Display S for Shift
@@ -557,13 +558,13 @@ module mojo_top (
       // SHR
       // 8b01000000 >> 4 = 8b00000100
       alu.alufn = 6b100001; // SHR opcode 
-      alu.b = 8b01000000;
-      alu.a = 8b100;
+      alu.b = 8b100;
+      alu.a = 8b01000000;
         
       // Displaying data
       // io led
-      io_led[0][7:0] = 8b01000000;
-      io_led[1][7:0] = 8b100;
+      io_led[0][7:0] = 8b100;
+      io_led[1][7:0] = 8b01000000;
       io_led[2][7:0] = alu.aluOUT[7:0];
         
       // Display S for shift
@@ -580,12 +581,12 @@ module mojo_top (
       // SRA
       // 8b11000000 >> 4 = 8b11111100
       alu.alufn = 6b100011; // SRA opcode 
-      alu.b = 8b01000000;
-      alu.a = 8b100;
+      alu.b = 8b100;
+      alu.a =  8b11000000;
         
       // Displaying data
       // io led
-      io_led[0][7:0] = 8b01000000;
+      io_led[0][7:0] = 8b11000000;
       io_led[1][7:0] = 8b100;
       io_led[2][7:0] = alu.aluOUT[7:0];
         
@@ -601,7 +602,7 @@ module mojo_top (
     
     testing.SHIFT_ERROR3:
       // ERROR
-      // 8b11000000 >> 4 = 8b11111100
+      // 8b1000000 >> 4 = 8b101
       alu.alufn = 6b100000; // SRA opcode 
       alu.b = 8b1;
       alu.a = 8b100;
@@ -661,7 +662,7 @@ module mojo_top (
       num3.char = d13;
       num0.char = d1;  
         
-      counter.d = counter.q+1;
+      counter.d = counter. q+1;
       if(counter.q[T] == 1){
         counter.d = 0;
         testing.d = testing.COMP_LT2;                                                                                 
@@ -756,7 +757,7 @@ module mojo_top (
       }
         
     testing.COMP_ERROR6:
-      // 2 == 2 -> FALSE 
+      // 2 == 2 
       alu.alufn = 6b110011; 
       alu.b = 8b10;
       alu.a = 8b10;
@@ -764,12 +765,12 @@ module mojo_top (
       // Displaying data
       // io led
       io_led[0][7:0] = 8b10;
-      io_led[1][7:0] = 8b11;
+      io_led[1][7:0] = 8b10;
       io_led[2][7:0] = alu.aluOUT[7:0] - 1;
         
       // Display S for SHIFt
       num3.char = d13;
-      num1.char = d14;
+      num2.char = d14;
       num0.char = d6;  
         
       counter.d = counter.q+1;

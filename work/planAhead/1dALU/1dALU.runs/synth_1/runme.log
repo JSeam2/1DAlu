@@ -63,13 +63,13 @@ WARNING:Xst:647 - Input <io_dip<23:22>> is never used. This port will be preserv
 INFO:Xst:3210 - "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/mojo_top_0.v" line 73: Output port <z> of the instance <alu> is unconnected or connected to loadless signal.
 INFO:Xst:3210 - "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/planAhead/1dALU/1dALU.srcs/sources_1/imports/verilog/mojo_top_0.v" line 73: Output port <n> of the instance <alu> is unconnected or connected to loadless signal.
     Found 5-bit register for signal <M_testing_q>.
-    Found 28-bit register for signal <M_counter_q>.
+    Found 30-bit register for signal <M_counter_q>.
     Found finite state machine <FSM_0> for signal <M_testing_q>.
     -----------------------------------------------------------------------
     | States             | 24                                             |
     | Transitions        | 48                                             |
     | Inputs             | 2                                              |
-    | Outputs            | 43                                             |
+    | Outputs            | 42                                             |
     | Clock              | clk (rising_edge)                              |
     | Reset              | M_reset_cond_out (positive)                    |
     | Reset type         | synchronous                                    |
@@ -80,9 +80,10 @@ INFO:Xst:3210 - "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/p
     -----------------------------------------------------------------------
     Found 8-bit subtractor for signal <M_alu_aluOUT[7]_GND_1_o_sub_110_OUT> created at line 515.
     Found 8-bit adder for signal <M_alu_aluOUT[7]_GND_1_o_add_80_OUT> created at line 409.
-    Found 28-bit adder for signal <M_counter_q[27]_GND_1_o_add_110_OUT> created at line 519.
-    Found 4x4-bit Read Only RAM for signal <_n0195>
-    Found 8-bit 4-to-1 multiplexer for signal <_n0204> created at line 14.
+    Found 30-bit adder for signal <M_counter_q[29]_GND_1_o_add_110_OUT> created at line 519.
+    Found 4x4-bit Read Only RAM for signal <_n0197>
+    Found 24-bit 21-to-1 multiplexer for signal <io_led> created at line 163.
+    Found 8-bit 4-to-1 multiplexer for signal <_n0206> created at line 14.
     Found 1-bit tristate buffer for signal <spi_miso> created at line 114
     Found 1-bit tristate buffer for signal <spi_channel<3>> created at line 114
     Found 1-bit tristate buffer for signal <spi_channel<2>> created at line 114
@@ -92,8 +93,8 @@ INFO:Xst:3210 - "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/p
     Summary:
 	inferred   1 RAM(s).
 	inferred   3 Adder/Subtractor(s).
-	inferred  28 D-type flip-flop(s).
-	inferred  48 Multiplexer(s).
+	inferred  30 D-type flip-flop(s).
+	inferred  30 Multiplexer(s).
 	inferred   6 Tristate(s).
 	inferred   1 Finite State Machine(s).
 Unit <mojo_top_0> synthesized.
@@ -227,7 +228,7 @@ Macro Statistics
  15-bit adder                                          : 2
  16-bit adder                                          : 2
  19-bit adder                                          : 1
- 28-bit adder                                          : 1
+ 30-bit adder                                          : 1
  8-bit adder                                           : 1
  8-bit subtractor                                      : 1
  9-bit adder                                           : 2
@@ -235,7 +236,7 @@ Macro Statistics
  9-bit subtractor                                      : 1
 # Registers                                            : 3
  19-bit register                                       : 1
- 28-bit register                                       : 1
+ 30-bit register                                       : 1
  4-bit register                                        : 1
 # Comparators                                          : 9
  10-bit comparator lessequal                           : 1
@@ -247,10 +248,10 @@ Macro Statistics
  16-bit comparator lessequal                           : 1
  8-bit comparator lessequal                            : 1
  9-bit comparator lessequal                            : 1
-# Multiplexers                                         : 115
+# Multiplexers                                         : 97
  1-bit 2-to-1 multiplexer                              : 56
- 24-bit 2-to-1 multiplexer                             : 19
- 28-bit 2-to-1 multiplexer                             : 6
+ 24-bit 21-to-1 multiplexer                            : 1
+ 30-bit 2-to-1 multiplexer                             : 6
  4-bit 2-to-1 multiplexer                              : 3
  6-bit 2-to-1 multiplexer                              : 6
  8-bit 16-to-1 multiplexer                             : 1
@@ -281,7 +282,7 @@ The following registers are absorbed into counter <M_ctr_q>: 1 register on signa
 Unit <counter_2> synthesized (advanced).
 
 Synthesizing (advanced) Unit <mojo_top_0>.
-INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram__n0195> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
+INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram__n0197> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
     -----------------------------------------------------------------------
     | ram_type           | Distributed                         |          |
     -----------------------------------------------------------------------
@@ -319,7 +320,7 @@ Macro Statistics
  8x8-bit multiplier                                    : 2
 # Adders/Subtractors                                   : 14
  1-bit adder                                           : 1
- 28-bit adder                                          : 1
+ 30-bit adder                                          : 1
  8-bit adder                                           : 1
  8-bit adder carry in                                  : 8
  8-bit subtractor                                      : 1
@@ -327,8 +328,8 @@ Macro Statistics
  9-bit subtractor                                      : 1
 # Counters                                             : 1
  19-bit up counter                                     : 1
-# Registers                                            : 32
- Flip-Flops                                            : 32
+# Registers                                            : 34
+ Flip-Flops                                            : 34
 # Comparators                                          : 9
  10-bit comparator lessequal                           : 1
  11-bit comparator lessequal                           : 1
@@ -339,10 +340,10 @@ Macro Statistics
  16-bit comparator lessequal                           : 1
  8-bit comparator lessequal                            : 1
  9-bit comparator lessequal                            : 1
-# Multiplexers                                         : 115
+# Multiplexers                                         : 97
  1-bit 2-to-1 multiplexer                              : 56
- 24-bit 2-to-1 multiplexer                             : 19
- 28-bit 2-to-1 multiplexer                             : 6
+ 24-bit 21-to-1 multiplexer                            : 1
+ 30-bit 2-to-1 multiplexer                             : 6
  4-bit 2-to-1 multiplexer                              : 3
  6-bit 2-to-1 multiplexer                              : 6
  8-bit 16-to-1 multiplexer                             : 1
@@ -405,7 +406,6 @@ Optimizing unit <aluBOOL_9> ...
 Mapping all equations...
 Building and optimizing final netlist ...
 Found area constraint ratio of 100 (+ 0) on block mojo_top_0, actual ratio is 11.
-FlipFlop M_counter_q_27 has been replicated 1 time(s)
 FlipFlop M_testing_q_FSM_FFd1 has been replicated 2 time(s)
 FlipFlop M_testing_q_FSM_FFd2 has been replicated 1 time(s)
 FlipFlop M_testing_q_FSM_FFd3 has been replicated 1 time(s)
@@ -422,8 +422,8 @@ Unit <mojo_top_0> processed.
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 63
- Flip-Flops                                            : 63
+# Registers                                            : 64
+ Flip-Flops                                            : 64
 
 =========================================================================
 
@@ -447,7 +447,7 @@ Clock Information:
 -----------------------------------+------------------------+-------+
 Clock Signal                       | Clock buffer(FF name)  | Load  |
 -----------------------------------+------------------------+-------+
-clk                                | BUFGP                  | 63    |
+clk                                | BUFGP                  | 64    |
 -----------------------------------+------------------------+-------+
 
 Asynchronous Control Signals Information:
@@ -458,9 +458,9 @@ Timing Summary:
 ---------------
 Speed Grade: -2
 
-   Minimum period: 3.497ns (Maximum Frequency: 286.000MHz)
-   Minimum input arrival time before clock: 3.913ns
-   Maximum output required time after clock: 49.423ns
-   Maximum combinational path delay: 48.900ns
+   Minimum period: 3.543ns (Maximum Frequency: 282.247MHz)
+   Minimum input arrival time before clock: 3.526ns
+   Maximum output required time after clock: 49.492ns
+   Maximum combinational path delay: 48.898ns
 
 =========================================================================
