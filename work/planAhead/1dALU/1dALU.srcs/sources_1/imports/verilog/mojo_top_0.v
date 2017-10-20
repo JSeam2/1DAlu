@@ -271,7 +271,9 @@ module mojo_top_0 (
         io_led[8+0+7-:8] = 8'h02;
         io_led[16+0+7-:8] = M_alu_aluOUT[0+7-:8] + 1'h1;
         M_num3_char = 4'hc;
-        M_num2_char = 4'he;
+        if (M_alu_aluOUT[0+7-:8] != 8'h05) begin
+          M_num2_char = 4'he;
+        end
         M_num0_char = 3'h6;
         M_counter_d = M_counter_q + 1'h1;
         if (M_counter_q[29+0-:1] == 1'h1) begin
@@ -347,7 +349,9 @@ module mojo_top_0 (
         io_led[8+0+7-:8] = 8'h05;
         io_led[16+0+7-:8] = M_alu_aluOUT[0+7-:8] + 1'h1;
         M_num3_char = 4'h8;
-        M_num2_char = 4'he;
+        if (M_alu_aluOUT[0+7-:8] != 1'h1) begin
+          M_num2_char = 4'he;
+        end
         M_num0_char = 3'h4;
         M_counter_d = M_counter_q + 1'h1;
         if (M_counter_q[29+0-:1] == 1'h1) begin
@@ -389,8 +393,8 @@ module mojo_top_0 (
         M_alu_alufn = 6'h23;
         M_alu_b = 8'h04;
         M_alu_a = 8'hc0;
-        io_led[0+0+7-:8] = 8'hc0;
-        io_led[8+0+7-:8] = 8'h04;
+        io_led[0+0+7-:8] = 8'h04;
+        io_led[8+0+7-:8] = 8'hc0;
         io_led[16+0+7-:8] = M_alu_aluOUT[0+7-:8];
         M_num3_char = 3'h5;
         M_num0_char = 2'h2;

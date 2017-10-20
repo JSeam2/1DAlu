@@ -4,7 +4,7 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.03 secs
+Total CPU time to Xst completion: 0.02 secs
  
 --> 
 Reading design: mojo_top_0.prj
@@ -126,12 +126,12 @@ INFO:Xst:3210 - "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/p
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 8-bit subtractor for signal <M_alu_aluOUT[7]_GND_1_o_sub_110_OUT> created at line 515.
-    Found 8-bit adder for signal <M_alu_aluOUT[7]_GND_1_o_add_80_OUT> created at line 409.
-    Found 30-bit adder for signal <M_counter_q[29]_GND_1_o_add_110_OUT> created at line 519.
-    Found 4x4-bit Read Only RAM for signal <_n0197>
+    Found 8-bit subtractor for signal <M_alu_aluOUT[7]_GND_1_o_sub_114_OUT> created at line 519.
+    Found 8-bit adder for signal <M_alu_aluOUT[7]_GND_1_o_add_84_OUT> created at line 413.
+    Found 30-bit adder for signal <M_counter_q[29]_GND_1_o_add_114_OUT> created at line 523.
+    Found 4x4-bit Read Only RAM for signal <_n0189>
     Found 24-bit 21-to-1 multiplexer for signal <io_led> created at line 163.
-    Found 8-bit 4-to-1 multiplexer for signal <_n0206> created at line 14.
+    Found 8-bit 4-to-1 multiplexer for signal <_n0198> created at line 14.
     Found 1-bit tristate buffer for signal <spi_miso> created at line 114
     Found 1-bit tristate buffer for signal <spi_channel<3>> created at line 114
     Found 1-bit tristate buffer for signal <spi_channel<2>> created at line 114
@@ -142,7 +142,7 @@ INFO:Xst:3210 - "/home/ada/Documents/SUTD/Term4/compstruc/Workspace/1dALU/work/p
 	inferred   1 RAM(s).
 	inferred   3 Adder/Subtractor(s).
 	inferred  30 D-type flip-flop(s).
-	inferred  30 Multiplexer(s).
+	inferred  34 Multiplexer(s).
 	inferred   6 Tristate(s).
 	inferred   1 Finite State Machine(s).
 Unit <mojo_top_0> synthesized.
@@ -296,11 +296,11 @@ Macro Statistics
  16-bit comparator lessequal                           : 1
  8-bit comparator lessequal                            : 1
  9-bit comparator lessequal                            : 1
-# Multiplexers                                         : 97
+# Multiplexers                                         : 101
  1-bit 2-to-1 multiplexer                              : 56
  24-bit 21-to-1 multiplexer                            : 1
  30-bit 2-to-1 multiplexer                             : 6
- 4-bit 2-to-1 multiplexer                              : 3
+ 4-bit 2-to-1 multiplexer                              : 7
  6-bit 2-to-1 multiplexer                              : 6
  8-bit 16-to-1 multiplexer                             : 1
  8-bit 2-to-1 multiplexer                              : 14
@@ -330,7 +330,7 @@ The following registers are absorbed into counter <M_ctr_q>: 1 register on signa
 Unit <counter_2> synthesized (advanced).
 
 Synthesizing (advanced) Unit <mojo_top_0>.
-INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram__n0197> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
+INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram__n0189> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
     -----------------------------------------------------------------------
     | ram_type           | Distributed                         |          |
     -----------------------------------------------------------------------
@@ -388,11 +388,11 @@ Macro Statistics
  16-bit comparator lessequal                           : 1
  8-bit comparator lessequal                            : 1
  9-bit comparator lessequal                            : 1
-# Multiplexers                                         : 97
+# Multiplexers                                         : 101
  1-bit 2-to-1 multiplexer                              : 56
  24-bit 21-to-1 multiplexer                            : 1
  30-bit 2-to-1 multiplexer                             : 6
- 4-bit 2-to-1 multiplexer                              : 3
+ 4-bit 2-to-1 multiplexer                              : 7
  6-bit 2-to-1 multiplexer                              : 6
  8-bit 16-to-1 multiplexer                             : 1
  8-bit 2-to-1 multiplexer                              : 14
@@ -454,10 +454,10 @@ Optimizing unit <aluBOOL_9> ...
 Mapping all equations...
 Building and optimizing final netlist ...
 Found area constraint ratio of 100 (+ 0) on block mojo_top_0, actual ratio is 11.
-FlipFlop M_testing_q_FSM_FFd1 has been replicated 2 time(s)
-FlipFlop M_testing_q_FSM_FFd2 has been replicated 1 time(s)
+FlipFlop M_testing_q_FSM_FFd1 has been replicated 1 time(s)
+FlipFlop M_testing_q_FSM_FFd2 has been replicated 2 time(s)
 FlipFlop M_testing_q_FSM_FFd3 has been replicated 1 time(s)
-FlipFlop M_testing_q_FSM_FFd4 has been replicated 1 time(s)
+FlipFlop M_testing_q_FSM_FFd4 has been replicated 2 time(s)
 FlipFlop M_testing_q_FSM_FFd5 has been replicated 1 time(s)
 
 Final Macro Processing ...
@@ -470,8 +470,8 @@ Unit <mojo_top_0> processed.
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 64
- Flip-Flops                                            : 64
+# Registers                                            : 65
+ Flip-Flops                                            : 65
 
 =========================================================================
 
@@ -494,21 +494,21 @@ Top Level Output File Name         : mojo_top_0.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 514
+# BELS                             : 510
 #      GND                         : 4
 #      INV                         : 3
 #      LUT1                        : 47
-#      LUT2                        : 7
-#      LUT3                        : 49
-#      LUT4                        : 39
-#      LUT5                        : 57
-#      LUT6                        : 142
+#      LUT2                        : 10
+#      LUT3                        : 63
+#      LUT4                        : 20
+#      LUT5                        : 63
+#      LUT6                        : 135
 #      MUXCY                       : 73
-#      MUXF7                       : 10
+#      MUXF7                       : 9
 #      VCC                         : 4
 #      XORCY                       : 79
-# FlipFlops/Latches                : 64
-#      FDR                         : 30
+# FlipFlops/Latches                : 65
+#      FDR                         : 31
 #      FDRE                        : 30
 #      FDS                         : 4
 # Clock Buffers                    : 1
@@ -527,15 +527,15 @@ Selected Device : 6slx9tqg144-2
 
 
 Slice Logic Utilization: 
- Number of Slice Registers:              64  out of  11440     0%  
- Number of Slice LUTs:                  344  out of   5720     6%  
-    Number used as Logic:               344  out of   5720     6%  
+ Number of Slice Registers:              65  out of  11440     0%  
+ Number of Slice LUTs:                  341  out of   5720     5%  
+    Number used as Logic:               341  out of   5720     5%  
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:    353
-   Number with an unused Flip Flop:     289  out of    353    81%  
-   Number with an unused LUT:             9  out of    353     2%  
-   Number of fully used LUT-FF pairs:    55  out of    353    15%  
+ Number of LUT Flip Flop pairs used:    350
+   Number with an unused Flip Flop:     285  out of    350    81%  
+   Number with an unused LUT:             9  out of    350     2%  
+   Number of fully used LUT-FF pairs:    56  out of    350    16%  
    Number of unique control sets:         4
 
 IO Utilization: 
@@ -567,7 +567,7 @@ Clock Information:
 -----------------------------------+------------------------+-------+
 Clock Signal                       | Clock buffer(FF name)  | Load  |
 -----------------------------------+------------------------+-------+
-clk                                | BUFGP                  | 64    |
+clk                                | BUFGP                  | 65    |
 -----------------------------------+------------------------+-------+
 
 Asynchronous Control Signals Information:
@@ -578,10 +578,10 @@ Timing Summary:
 ---------------
 Speed Grade: -2
 
-   Minimum period: 3.543ns (Maximum Frequency: 282.247MHz)
+   Minimum period: 3.602ns (Maximum Frequency: 277.624MHz)
    Minimum input arrival time before clock: 3.526ns
-   Maximum output required time after clock: 49.492ns
-   Maximum combinational path delay: 48.898ns
+   Maximum output required time after clock: 50.339ns
+   Maximum combinational path delay: 49.339ns
 
 Timing Details:
 ---------------
@@ -589,56 +589,26 @@ All values displayed in nanoseconds (ns)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'clk'
-  Clock period: 3.543ns (frequency: 282.247MHz)
-  Total number of paths / destination ports: 1016 / 153
+  Clock period: 3.602ns (frequency: 277.624MHz)
+  Total number of paths / destination ports: 1020 / 155
 -------------------------------------------------------------------------
-Delay:               3.543ns (Levels of Logic = 32)
-  Source:            M_counter_q_0 (FF)
-  Destination:       M_counter_q_29 (FF)
+Delay:               3.602ns (Levels of Logic = 2)
+  Source:            M_testing_q_FSM_FFd3_1 (FF)
+  Destination:       M_counter_q_28 (FF)
   Source Clock:      clk rising
   Destination Clock: clk rising
 
-  Data Path: M_counter_q_0 to M_counter_q_29
+  Data Path: M_testing_q_FSM_FFd3_1 to M_counter_q_28
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDRE:C->Q             1   0.525   0.681  M_counter_q_0 (M_counter_q_0)
-     INV:I->O              1   0.255   0.000  Madd_M_counter_q[29]_GND_1_o_add_110_OUT_lut<0>_INV_0 (Madd_M_counter_q[29]_GND_1_o_add_110_OUT_lut<0>)
-     MUXCY:S->O            1   0.215   0.000  Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<0> (Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<0>)
-     MUXCY:CI->O           1   0.023   0.000  Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<1> (Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<1>)
-     MUXCY:CI->O           1   0.023   0.000  Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<2> (Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<2>)
-     MUXCY:CI->O           1   0.023   0.000  Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<3> (Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<3>)
-     MUXCY:CI->O           1   0.023   0.000  Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<4> (Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<4>)
-     MUXCY:CI->O           1   0.023   0.000  Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<5> (Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<5>)
-     MUXCY:CI->O           1   0.023   0.000  Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<6> (Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<6>)
-     MUXCY:CI->O           1   0.023   0.000  Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<7> (Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<7>)
-     MUXCY:CI->O           1   0.023   0.000  Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<8> (Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<8>)
-     MUXCY:CI->O           1   0.023   0.000  Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<9> (Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<9>)
-     MUXCY:CI->O           1   0.023   0.000  Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<10> (Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<10>)
-     MUXCY:CI->O           1   0.023   0.000  Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<11> (Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<11>)
-     MUXCY:CI->O           1   0.023   0.000  Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<12> (Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<12>)
-     MUXCY:CI->O           1   0.023   0.000  Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<13> (Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<13>)
-     MUXCY:CI->O           1   0.023   0.000  Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<14> (Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<14>)
-     MUXCY:CI->O           1   0.023   0.000  Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<15> (Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<15>)
-     MUXCY:CI->O           1   0.023   0.000  Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<16> (Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<16>)
-     MUXCY:CI->O           1   0.023   0.000  Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<17> (Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<17>)
-     MUXCY:CI->O           1   0.023   0.000  Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<18> (Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<18>)
-     MUXCY:CI->O           1   0.023   0.000  Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<19> (Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<19>)
-     MUXCY:CI->O           1   0.023   0.000  Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<20> (Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<20>)
-     MUXCY:CI->O           1   0.023   0.000  Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<21> (Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<21>)
-     MUXCY:CI->O           1   0.023   0.000  Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<22> (Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<22>)
-     MUXCY:CI->O           1   0.023   0.000  Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<23> (Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<23>)
-     MUXCY:CI->O           1   0.023   0.000  Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<24> (Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<24>)
-     MUXCY:CI->O           1   0.023   0.000  Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<25> (Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<25>)
-     MUXCY:CI->O           1   0.023   0.000  Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<26> (Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<26>)
-     MUXCY:CI->O           1   0.023   0.000  Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<27> (Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<27>)
-     MUXCY:CI->O           0   0.023   0.000  Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<28> (Madd_M_counter_q[29]_GND_1_o_add_110_OUT_cy<28>)
-     XORCY:CI->O           1   0.206   0.682  Madd_M_counter_q[29]_GND_1_o_add_110_OUT_xor<29> (M_counter_q[29]_GND_1_o_add_110_OUT<29>)
-     LUT4:I3->O            1   0.254   0.000  Mmux_M_counter_d221 (M_counter_d<29>)
+     FDR:C->Q              2   0.525   1.156  M_testing_q_FSM_FFd3_1 (M_testing_q_FSM_FFd3_1)
+     LUT5:I0->O           18   0.254   1.343  Mmux_M_counter_d1101 (Mmux_M_counter_d110)
+     LUT3:I1->O            1   0.250   0.000  Mmux_M_counter_d221 (M_counter_d<29>)
      FDRE:D                    0.074          M_counter_q_29
     ----------------------------------------
-    Total                      3.543ns (2.180ns logic, 1.363ns route)
-                                       (61.5% logic, 38.5% route)
+    Total                      3.602ns (1.103ns logic, 2.499ns route)
+                                       (30.6% logic, 69.4% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
@@ -663,27 +633,26 @@ Offset:              3.526ns (Levels of Logic = 3)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'clk'
-  Total number of paths / destination ports: 3633029144 / 35
+  Total number of paths / destination ports: 7533451356 / 35
 -------------------------------------------------------------------------
-Offset:              49.492ns (Levels of Logic = 38)
+Offset:              50.339ns (Levels of Logic = 39)
   Source:            M_testing_q_FSM_FFd1 (FF)
-  Destination:       io_led<22> (PAD)
+  Destination:       io_seg<6> (PAD)
   Source Clock:      clk rising
 
-  Data Path: M_testing_q_FSM_FFd1 to io_led<22>
+  Data Path: M_testing_q_FSM_FFd1 to io_seg<6>
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDR:C->Q             81   0.525   2.492  M_testing_q_FSM_FFd1 (M_testing_q_FSM_FFd1)
+     FDR:C->Q             59   0.525   2.321  M_testing_q_FSM_FFd1 (M_testing_q_FSM_FFd1)
      begin scope: 'alu:M_testing_q_FSM_FFd1'
-     LUT5:I0->O           56   0.254   1.868  Mmux_aluOUT811 (Mmux_aluOUT81)
-     begin scope: 'alu/add:Mmux_aluOUT81'
-     begin scope: 'alu/add/a[7]_b[7]_div_6:Mmux_aluOUT81'
-     LUT6:I5->O            5   0.254   1.271  o<7>121 (o<7>12)
-     LUT6:I1->O            2   0.254   0.834  o<6>11 (o<6>)
-     LUT6:I4->O            3   0.250   1.042  Mmux_a[0]_GND_7_o_MUX_113_o161 (a[6]_GND_7_o_MUX_107_o)
-     LUT6:I2->O            4   0.254   1.234  o<5>12 (o<5>)
-     LUT5:I0->O            2   0.254   1.181  Mmux_a[0]_GND_7_o_MUX_139_o161 (a[6]_GND_7_o_MUX_133_o)
+     LUT5:I0->O           50   0.254   1.821  Mmux_aluOUT511 (Mmux_aluOUT51)
+     begin scope: 'alu/add:Mmux_aluOUT51'
+     begin scope: 'alu/add/a[7]_b[7]_div_6:Mmux_aluOUT51'
+     LUT6:I5->O            6   0.254   1.306  o<7>121 (o<7>12)
+     LUT6:I1->O            2   0.254   1.002  Mmux_a[0]_GND_7_o_MUX_113_o161 (a[6]_GND_7_o_MUX_107_o)
+     LUT6:I2->O            4   0.254   1.259  o<5>12 (o<5>)
+     LUT6:I0->O            2   0.254   1.181  Mmux_a[0]_GND_7_o_MUX_139_o161 (a[6]_GND_7_o_MUX_133_o)
      LUT6:I0->O            2   0.254   0.834  o<4>2 (Madd_GND_7_o_b[7]_add_9_OUT_Madd_Madd_cy<6>)
      LUT6:I4->O            5   0.250   1.296  o<4>11 (o<4>)
      LUT6:I0->O            3   0.254   1.221  Mmux_a[0]_GND_7_o_MUX_163_o151 (a[5]_GND_7_o_MUX_158_o)
@@ -691,57 +660,58 @@ Offset:              49.492ns (Levels of Logic = 38)
      LUT6:I2->O           12   0.254   1.524  o<3>11 (o<3>)
      LUT6:I0->O            3   0.254   1.221  Mmux_a[0]_GND_7_o_MUX_185_o141 (a[4]_GND_7_o_MUX_181_o)
      LUT6:I0->O            1   0.254   0.958  o<2>1 (o<2>1)
-     LUT4:I0->O            1   0.254   0.790  o<2>24_SW0 (N34)
+     LUT4:I0->O            1   0.254   0.790  o<2>24_SW0 (N38)
      LUT6:I4->O           15   0.250   1.610  o<2>24 (o<2>)
      LUT6:I0->O            2   0.254   1.181  Mmux_a[0]_GND_7_o_MUX_205_o131 (a[3]_GND_7_o_MUX_202_o)
      LUT6:I0->O            2   0.254   1.181  o<1>3 (o<1>1)
-     LUT6:I0->O            1   0.254   0.000  o<1>1_G (N61)
+     LUT6:I0->O            1   0.254   0.000  o<1>1_G (N67)
      MUXF7:I1->O           1   0.175   0.790  o<1>1 (o<1>2)
      LUT5:I3->O            5   0.250   1.271  o<1>21 (o<1>)
      LUT5:I0->O            2   0.254   1.002  Mmux_n028651 (n0286<4>)
-     LUT5:I1->O            2   0.254   1.002  o<0>1_SW1 (N30)
-     LUT6:I2->O            1   0.254   0.000  o<0>1_G (N65)
+     LUT5:I1->O            2   0.254   1.002  o<0>1_SW1 (N36)
+     LUT6:I2->O            1   0.254   0.000  o<0>1_G (N71)
      MUXF7:I1->O           2   0.175   1.181  o<0>1 (o<0>2)
-     LUT6:I0->O            1   0.254   0.000  o<0>2_G (N63)
+     LUT6:I0->O            1   0.254   0.000  o<0>2_G (N69)
      MUXF7:I1->O           1   0.175   0.681  o<0>2 (a[7]_b[7]_div_6_OUT<0>)
      end scope: 'alu/add/a[7]_b[7]_div_6:o<0>'
      DSP48A1:B0->M0        1   3.894   0.682  Mmult_n0035 (n0035<0>)
      LUT5:I4->O            1   0.254   0.000  Mmux_temp3_rs_lut<0> (Mmux_temp3_rs_lut<0>)
      MUXCY:S->O            1   0.215   0.000  Mmux_temp3_rs_cy<0> (Mmux_temp3_rs_cy<0>)
-     XORCY:CI->O           1   0.206   0.790  Mmux_temp3_rs_xor<1> (out<1>)
+     XORCY:CI->O           1   0.206   0.958  Mmux_temp3_rs_xor<1> (out<1>)
      end scope: 'alu/add:out<1>'
-     LUT6:I4->O            9   0.250   1.406  Mmux_aluOUT37 (aluOUT<1>)
+     LUT5:I1->O           10   0.254   1.236  Mmux_aluOUT37 (aluOUT<1>)
      end scope: 'alu:aluOUT<1>'
-     LUT6:I1->O            2   0.254   0.834  Mmux_io_led3011 (Mmux_io_led301)
-     LUT6:I4->O            1   0.250   1.112  Mmux_io_led30_SW0 (N8)
-     LUT6:I1->O            1   0.254   0.681  Mmux_io_led30 (io_led_22_OBUF)
-     OBUF:I->O                 2.912          io_led_22_OBUF (io_led<22>)
+     LUT3:I0->O            1   0.235   0.682  M_alu_aluOUT[7]_GND_1_o_not_equal_66_o_SW0 (N2)
+     LUT6:I5->O            3   0.254   1.196  M_alu_aluOUT[7]_GND_1_o_not_equal_66_o (M_alu_aluOUT[7]_GND_1_o_not_equal_66_o)
+     LUT6:I1->O            2   0.254   0.726  Mmux_io_seg7511 (Mmux_io_seg7511)
+     LUT5:I4->O            3   0.254   0.994  Mmux_io_seg752 (Mmux_io_seg75)
+     LUT3:I0->O            1   0.235   0.681  Mmux_io_seg75 (io_seg_6_OBUF)
+     OBUF:I->O                 2.912          io_seg_6_OBUF (io_seg<6>)
     ----------------------------------------
-    Total                     49.492ns (15.365ns logic, 34.127ns route)
+    Total                     50.339ns (15.593ns logic, 34.746ns route)
                                        (31.0% logic, 69.0% route)
 
 =========================================================================
 Timing constraint: Default path analysis
-  Total number of paths / destination ports: 910850178 / 28
+  Total number of paths / destination ports: 2081809896 / 30
 -------------------------------------------------------------------------
-Delay:               48.898ns (Levels of Logic = 39)
-  Source:            io_dip<4> (PAD)
-  Destination:       io_led<22> (PAD)
+Delay:               49.339ns (Levels of Logic = 40)
+  Source:            io_dip<6> (PAD)
+  Destination:       io_seg<6> (PAD)
 
-  Data Path: io_dip<4> to io_led<22>
+  Data Path: io_dip<6> to io_seg<6>
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O            10   1.328   1.463  io_dip_4_IBUF (io_dip_4_IBUF)
-     LUT6:I0->O           12   0.254   1.499  io_led<4>1 (M_alu_b<4>)
-     begin scope: 'alu:b<4>'
-     begin scope: 'alu/add:b<4>'
-     begin scope: 'alu/add/a[7]_b[7]_div_6:b<4>'
-     LUT6:I1->O            5   0.254   1.271  o<7>121 (o<7>12)
-     LUT6:I1->O            2   0.254   0.834  o<6>11 (o<6>)
-     LUT6:I4->O            3   0.250   1.042  Mmux_a[0]_GND_7_o_MUX_113_o161 (a[6]_GND_7_o_MUX_107_o)
-     LUT6:I2->O            4   0.254   1.234  o<5>12 (o<5>)
-     LUT5:I0->O            2   0.254   1.181  Mmux_a[0]_GND_7_o_MUX_139_o161 (a[6]_GND_7_o_MUX_133_o)
+     IBUF:I->O             1   1.328   0.790  io_dip_6_IBUF (io_dip_6_IBUF)
+     LUT6:I4->O           13   0.250   1.553  io_led<6>1 (M_alu_b<6>)
+     begin scope: 'alu:b<6>'
+     begin scope: 'alu/add:b<6>'
+     begin scope: 'alu/add/a[7]_b[7]_div_6:b<6>'
+     LUT6:I0->O            6   0.254   1.306  o<7>121 (o<7>12)
+     LUT6:I1->O            2   0.254   1.002  Mmux_a[0]_GND_7_o_MUX_113_o161 (a[6]_GND_7_o_MUX_107_o)
+     LUT6:I2->O            4   0.254   1.259  o<5>12 (o<5>)
+     LUT6:I0->O            2   0.254   1.181  Mmux_a[0]_GND_7_o_MUX_139_o161 (a[6]_GND_7_o_MUX_133_o)
      LUT6:I0->O            2   0.254   0.834  o<4>2 (Madd_GND_7_o_b[7]_add_9_OUT_Madd_Madd_cy<6>)
      LUT6:I4->O            5   0.250   1.296  o<4>11 (o<4>)
      LUT6:I0->O            3   0.254   1.221  Mmux_a[0]_GND_7_o_MUX_163_o151 (a[5]_GND_7_o_MUX_158_o)
@@ -749,34 +719,36 @@ Delay:               48.898ns (Levels of Logic = 39)
      LUT6:I2->O           12   0.254   1.524  o<3>11 (o<3>)
      LUT6:I0->O            3   0.254   1.221  Mmux_a[0]_GND_7_o_MUX_185_o141 (a[4]_GND_7_o_MUX_181_o)
      LUT6:I0->O            1   0.254   0.958  o<2>1 (o<2>1)
-     LUT4:I0->O            1   0.254   0.790  o<2>24_SW0 (N34)
+     LUT4:I0->O            1   0.254   0.790  o<2>24_SW0 (N38)
      LUT6:I4->O           15   0.250   1.610  o<2>24 (o<2>)
      LUT6:I0->O            2   0.254   1.181  Mmux_a[0]_GND_7_o_MUX_205_o131 (a[3]_GND_7_o_MUX_202_o)
      LUT6:I0->O            2   0.254   1.181  o<1>3 (o<1>1)
-     LUT6:I0->O            1   0.254   0.000  o<1>1_G (N61)
+     LUT6:I0->O            1   0.254   0.000  o<1>1_G (N67)
      MUXF7:I1->O           1   0.175   0.790  o<1>1 (o<1>2)
      LUT5:I3->O            5   0.250   1.271  o<1>21 (o<1>)
      LUT5:I0->O            2   0.254   1.002  Mmux_n028651 (n0286<4>)
-     LUT5:I1->O            2   0.254   1.002  o<0>1_SW1 (N30)
-     LUT6:I2->O            1   0.254   0.000  o<0>1_G (N65)
+     LUT5:I1->O            2   0.254   1.002  o<0>1_SW1 (N36)
+     LUT6:I2->O            1   0.254   0.000  o<0>1_G (N71)
      MUXF7:I1->O           2   0.175   1.181  o<0>1 (o<0>2)
-     LUT6:I0->O            1   0.254   0.000  o<0>2_G (N63)
+     LUT6:I0->O            1   0.254   0.000  o<0>2_G (N69)
      MUXF7:I1->O           1   0.175   0.681  o<0>2 (a[7]_b[7]_div_6_OUT<0>)
      end scope: 'alu/add/a[7]_b[7]_div_6:o<0>'
      DSP48A1:B0->M0        1   3.894   0.682  Mmult_n0035 (n0035<0>)
      LUT5:I4->O            1   0.254   0.000  Mmux_temp3_rs_lut<0> (Mmux_temp3_rs_lut<0>)
      MUXCY:S->O            1   0.215   0.000  Mmux_temp3_rs_cy<0> (Mmux_temp3_rs_cy<0>)
-     XORCY:CI->O           1   0.206   0.790  Mmux_temp3_rs_xor<1> (out<1>)
+     XORCY:CI->O           1   0.206   0.958  Mmux_temp3_rs_xor<1> (out<1>)
      end scope: 'alu/add:out<1>'
-     LUT6:I4->O            9   0.250   1.406  Mmux_aluOUT37 (aluOUT<1>)
+     LUT5:I1->O           10   0.254   1.236  Mmux_aluOUT37 (aluOUT<1>)
      end scope: 'alu:aluOUT<1>'
-     LUT6:I1->O            2   0.254   0.834  Mmux_io_led3011 (Mmux_io_led301)
-     LUT6:I4->O            1   0.250   1.112  Mmux_io_led30_SW0 (N8)
-     LUT6:I1->O            1   0.254   0.681  Mmux_io_led30 (io_led_22_OBUF)
-     OBUF:I->O                 2.912          io_led_22_OBUF (io_led<22>)
+     LUT3:I0->O            1   0.235   0.682  M_alu_aluOUT[7]_GND_1_o_not_equal_66_o_SW0 (N2)
+     LUT6:I5->O            3   0.254   1.196  M_alu_aluOUT[7]_GND_1_o_not_equal_66_o (M_alu_aluOUT[7]_GND_1_o_not_equal_66_o)
+     LUT6:I1->O            2   0.254   0.726  Mmux_io_seg7511 (Mmux_io_seg7511)
+     LUT5:I4->O            3   0.254   0.994  Mmux_io_seg752 (Mmux_io_seg75)
+     LUT3:I0->O            1   0.235   0.681  Mmux_io_seg75 (io_seg_6_OBUF)
+     OBUF:I->O                 2.912          io_seg_6_OBUF (io_seg<6>)
     ----------------------------------------
-    Total                     48.898ns (16.168ns logic, 32.730ns route)
-                                       (33.1% logic, 66.9% route)
+    Total                     49.339ns (16.392ns logic, 32.947ns route)
+                                       (33.2% logic, 66.8% route)
 
 =========================================================================
 
@@ -788,19 +760,19 @@ Clock to Setup on destination clock clk
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-clk            |    3.543|         |         |         |
+clk            |    3.602|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 =========================================================================
 
 
 Total REAL time to Xst completion: 7.00 secs
-Total CPU time to Xst completion: 7.05 secs
+Total CPU time to Xst completion: 7.20 secs
  
 --> 
 
 
-Total memory usage is 391984 kilobytes
+Total memory usage is 392084 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :   12 (   0 filtered)

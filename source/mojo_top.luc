@@ -386,7 +386,7 @@ module mojo_top (
         
       testing.ADDER_ERROR6:
         // Test Case ERROR     
-        // 2 + 4 != 5
+        // 2 + 4 = 7
         // 0000 0010 + 0000 0100 != 0000 0101
         
         alu.alufn = 6b0; // MOD Opcode
@@ -403,7 +403,9 @@ module mojo_top (
         // display A for adder on 7 seg
         // display err
         num3.char = d12;
-        num2.char = d14;
+        if(alu.aluOUT[7:0] != 8b101){
+          num2.char = d14;
+        }
         num0.char = d6;
         
         // move to next state
@@ -522,7 +524,9 @@ module mojo_top (
         
       // Display B for Boolean
       num3.char = d8;
-      num2.char = d14;
+      if(alu.aluOUT[7:0] != 0001){
+        num2.char = d14;
+        }
       num0.char = d4;  
         
       counter.d = counter.q+1;
@@ -586,8 +590,8 @@ module mojo_top (
         
       // Displaying data
       // io led
-      io_led[0][7:0] = 8b11000000;
-      io_led[1][7:0] = 8b100;
+      io_led[0][7:0] = 8b100;
+      io_led[1][7:0] = 8b11000000;
       io_led[2][7:0] = alu.aluOUT[7:0];
         
       // Display S for SHIFt
@@ -602,7 +606,7 @@ module mojo_top (
     
     testing.SHIFT_ERROR3:
       // ERROR
-      // 8b1000000 >> 4 = 8b101
+      // 8b1< 4 = 8b100000
       alu.alufn = 6b100000; // SRA opcode 
       alu.b = 8b1;
       alu.a = 8b100;
@@ -615,7 +619,7 @@ module mojo_top (
         
       // Display S for SHIFt
       num3.char = d5;
-      num2. char = d14;
+      num2.char = d14;
       num0.char = d3;  
         
       counter.d = counter.q+1;
